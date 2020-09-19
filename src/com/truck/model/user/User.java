@@ -1,5 +1,7 @@
 package com.truck.model.user;
 
+import java.time.LocalDateTime;
+
 public class User {
 	
 	private String firstName;
@@ -10,7 +12,7 @@ public class User {
 	private Phone phoneNumber;
 	private String email;
 	private String userType;
-	
+	private LocalDateTime dateOfBirth;
 	
 	public String getFirstName() {
 		return firstName;
@@ -75,5 +77,13 @@ public class User {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	
+	public LocalDateTime getDateOfBirth() {
+		return dateOfBirth;
+	}
+	
+	public void setDateOfBirth(LocalDateTime dob) {
+		this.dateOfBirth = dob;
 	}
 }

@@ -8,7 +8,7 @@ import com.truck.model.order.Order;
 
 public class Customer extends User{
 	private int customerId;
-	private String driverLicense;
+	private License driverLicense;
 	private int age;
 	private List<Order> orders = new ArrayList<Order>();
 
@@ -28,11 +28,11 @@ public class Customer extends User{
 		return age; 
 	}
 	
-	public String getDriverLicense() {
+	public License getDriverLicense() {
 		return driverLicense;
 	}
 	
-	public void setDriverLicense(String driverLicense) {
+	public void setDriverLicense(License driverLicense) {
 		this.driverLicense = driverLicense;
 	}
 	
