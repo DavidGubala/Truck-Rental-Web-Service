@@ -1,19 +1,43 @@
 package com.truck.model.order;
 
-import com.truck.model.item.Product;
+import com.truck.model.product.Product;
+import com.truck.model.user.Customer;
+import com.truck.model.order.Reservation;
+import java.time.LocalDateTime;
 
 public class Order {
-	private Product product;
-	private String date;        //When did they order
-	private String duration;    //How long they will rent
-	//private int quantity;
-
-	public Order() {}
+	private int orderId;
+	private LocalDateTime orderDate;
+	private String orderStatus;
 	
-//	public OrderDetail(Product product, int quantity) {
-//		this.product = product;
-//		this.quantity = quantity;
-//	}
+	private Customer customer;
+	private Product product;
+	private Reservation reservaton;
+	private Transaction transaction;
+	
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int id) {
+		this.orderId = id;
+	}
+	
+	public LocalDateTime getDate() {
+		return orderDate;
+	}
+	
+	public void setDate(LocalDateTime date) {
+		this.orderDate = date;
+	}
+	
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String status) {
+		this.orderStatus = status;
+	}
 	
 	public Product getProduct() {
 		return product;
@@ -22,29 +46,28 @@ public class Order {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-	public String getDate() {
-		return date;
-	}
-	
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
-	public String getDuration() {
-		return duration;
-	}
-	
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
-//	public int getQuantity() {
-//		return quantity;
-//	}
-//	
-//	public void setQuantity(int quantity) {
-//		this.quantity = quantity;
-//	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+	
+	public void setCostumer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Reservation getReservation() {
+		return reservaton;
+	}
+	
+	public void setReservation(Reservation reservaton) {
+		this.reservaton = reservaton;
+	}
+	
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	
+	public void setTransaction(Transaction transaction) {
+		this.transaction = transaction;
+	}
 }

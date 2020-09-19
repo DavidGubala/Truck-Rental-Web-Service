@@ -5,8 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import com.truck.model.customer.Address;
-import com.truck.model.customer.Customer;
+
+import com.truck.model.user.Address;
+import com.truck.model.user.Customer;
 
 public class CustomerDAO {
 	public CustomerDAO() {}

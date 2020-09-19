@@ -1,4 +1,4 @@
-package com.truck.model.customer;
+package com.truck.model.user;
 
 public class Address {
 

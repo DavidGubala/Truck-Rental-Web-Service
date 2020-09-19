@@ -1,7 +1,7 @@
 package com.truck.model.service;
 
 import com.truck.dal.CustomerDAO;
-import com.truck.model.customer.Customer;
+import com.truck.model.user.Customer;
 
 public class CustomerService {
 private CustomerDAO custDAO = new CustomerDAO();
