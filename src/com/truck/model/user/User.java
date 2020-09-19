@@ -7,7 +7,7 @@ public class User {
 	private String CompanyName;
 	private Address homeAddress;
 	private Address billingAddress;
-	private String phoneNumber;
+	private Phone phoneNumber;
 	private String email;
 	private String userType;
 	
@@ -53,11 +53,11 @@ public class User {
 		this.homeAddress = homeAddress;
 	}
 	
-	public String getphoneNumber() {
+	public Phone getphoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setphoneNumber(String phoneNumber) {
+	public void setphoneNumber(Phone phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
