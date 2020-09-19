@@ -2,30 +2,22 @@ package com.truck.model.item;
 
 public class Product {
 	private String id;
-	private String title;
-	private double price;
+	private double pricePerMile;
 	
-	public String getId() {
+	public String getID() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setID(String id) {
 		this.id = id;
 	}
 	
-	public String getTitle() {
-		return title;
+	
+	public double getPricePerMile() {
+		return pricePerMile;
 	}
 	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	public double getPrice() {
-		return price;
-	}
-	
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPricePerMile(double pricePerMile) {
+		this.pricePerMile = pricePerMile;
 	}
 }
