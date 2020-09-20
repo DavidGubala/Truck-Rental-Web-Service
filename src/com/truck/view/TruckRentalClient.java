@@ -28,7 +28,7 @@ public class TruckRentalClient {
 
 	        //Create order for the customer
 	        Order order1 = new Order();
-	        order1.setOrderId(666);
+	        order1.setOrderId(1);
 
 	        //Associate the order with the customer
 	        customer.addOrder(order1);
@@ -60,7 +60,6 @@ public class TruckRentalClient {
 	        
 	        //finish order	        
 	        order1.confirmOrder();
-	        order1.orderPayed();
 	        
 	        // NOTE: To cancel the request, un-comment the following line.
 	        //order.cancel();
