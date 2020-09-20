@@ -71,7 +71,7 @@ public class Order {
 		this.transaction = transaction;
 	}
 	
-	public void addProduct(Product product, int quantity) {
+	public void addProduct(Product product) {
 		if (orderStatus.equals("Open")) {
 			orderDetails.add(new OrderDetail());
 		} else {
@@ -100,9 +100,8 @@ public class Order {
 	public double getOrderTotal() {
 		double total = 0.00;
 		for (OrderDetail line : orderDetails) {
-			total += line.getProduct().getPricePerMile() * line.getQuantity();
+			total += line.getProduct().getPricePerMile();
 		}
-		
 		return total;
 	}
 }
