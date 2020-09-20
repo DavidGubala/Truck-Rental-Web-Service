@@ -1,6 +1,6 @@
 package com.truck.model.product;
 
-public class Vehicle {
+public class Vehicle extends Product {
 	private String plateNumber;
 	private String make;
 	private String model;

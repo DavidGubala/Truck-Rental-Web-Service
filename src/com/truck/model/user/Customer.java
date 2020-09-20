@@ -8,7 +8,7 @@ import com.truck.model.order.Order;
 
 public class Customer extends User{
 	private int customerId;
-	private License driverLicense;
+	private String driverLicense;
 	private List<Order> orders = new ArrayList<Order>();
 
 	public List<Order> getOrders() {
@@ -19,11 +19,11 @@ public class Customer extends User{
 		this.orders = orders;
 	}
 	
-	public License getDriverLicense() {
+	public String getDriverLicense() {
 		return driverLicense;
 	}
 	
-	public void setDriverLicense(License driverLicense) {
+	public void setDriverLicense(String driverLicense) {
 		this.driverLicense = driverLicense;
 	}
 	
@@ -38,4 +38,7 @@ public class Customer extends User{
 	public void addOrder(Order order) {
 		orders.add(order);
 	}
+	
+
+
 }

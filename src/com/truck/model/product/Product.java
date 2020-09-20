@@ -2,7 +2,7 @@ package com.truck.model.product;
 
 public class Product {
 	private int productId;
-	private double price;
+	private double pricePerMile;
 	
 	public int getProductId() {
 		return productId;
@@ -12,11 +12,11 @@ public class Product {
 		this.productId = productId;
 	}
 	
-	public double getPrice() {
-		return price;
+	public double getPricePerMile() {
+		return pricePerMile;
 	}
 	
-	public void setPrice(double price) {
-		this.price = price;
+	public void setPricePerMile(double pricePerMile) {
+		this.pricePerMile = pricePerMile;
 	}
 }
