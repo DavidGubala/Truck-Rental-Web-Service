@@ -25,7 +25,7 @@ public class CustomerDAO {
 	      //Get Customer
     	  Customer customer = new Customer();
 	      while ( custRS.next() ) {
-	    	  customer.setCustomerId(custRS.getString("customerID"));
+	    	  customer.setCustomerId(custRS.getInt("customerID"));
 	    	  customer.setLastName(custRS.getString("lname"));
 	    	  customer.setFirstName(custRS.getString("fname"));
 	    	  customer.setDriverLicense(custRS.getString("dlicense"));
@@ -74,7 +74,7 @@ public class CustomerDAO {
         	//Insert the customer object
             String custStm = "INSERT INTO Customer(customerID, lname, fname, dlicense) VALUES(?, ?, ?)";
             custPst = con.prepareStatement(custStm);
-            custPst.setString(1, cust.getCustomerId());
+            custPst.setInt(1, cust.getCustomerId());
             custPst.setString(2, cust.getLastName());       
             custPst.setString(3, cust.getFirstName()); 
             custPst.setString(4, cust.getDriverLicense());
@@ -83,7 +83,7 @@ public class CustomerDAO {
         	//Insert the customer address object
             String addStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
             addPst = con.prepareStatement(addStm);
-            addPst.setString(1, cust.getCustomerId());
+            addPst.setInt(1, cust.getCustomerId());
             addPst.setString(2, cust.getBillingAddress().getAddressId());  
             addPst.setString(3, cust.getBillingAddress().getStreet());       
             addPst.setString(4, cust.getBillingAddress().getUnit());  
