@@ -12,7 +12,7 @@ public class Phone {
 		this.phoneNumber = num;
 	}
 	
-	public String getPhonType() {
+	public String getPhoneType() {
 		return phoneType;
 	}
 	

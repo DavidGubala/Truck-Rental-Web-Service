@@ -2,7 +2,7 @@ package com.truck.model.user;
 
 public class Address {
 
-		private String addressId;
+		private int addressId;
 		private String street;
 		private String unit;
 		private String city;
@@ -11,11 +11,11 @@ public class Address {
 		
 		public Address() {}
 		
-		public String getAddressId() {
+		public int getAddressId() {
 			return addressId;
 		}
 		
-		public void setAddressId(String addressId) {
+		public void setAddressId(int addressId) {
 			this.addressId = addressId;
 		}
 		

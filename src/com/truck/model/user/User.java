@@ -1,6 +1,6 @@
 package com.truck.model.user;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 public class User {
 	
@@ -9,10 +9,10 @@ public class User {
 	private String CompanyName;
 	private Address homeAddress;
 	private Address billingAddress;
-	private Phone phoneNumber;
+	private Phone phone;
 	private String email;
 	private String userType;
-	private LocalDateTime dateOfBirth;
+	private Date dateOfBirth;
 	
 	public String getFirstName() {
 		return firstName;
@@ -55,12 +55,12 @@ public class User {
 		this.homeAddress = homeAddress;
 	}
 	
-	public Phone getphoneNumber() {
-		return phoneNumber;
+	public Phone getPhone() {
+		return phone;
 	}
 
-	public void setphoneNumber(Phone phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhone(Phone phone) {
+		this.phone = phone;
 	}
 	
 	public String getEmail() {
@@ -79,11 +79,11 @@ public class User {
 		this.userType = userType;
 	}
 	
-	public LocalDateTime getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	public void setDateOfBirth(LocalDateTime dob) {
+	public void setDateOfBirth(Date dob) {
 		this.dateOfBirth = dob;
 	}
 }

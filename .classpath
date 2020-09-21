@@ -6,6 +6,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/David/git/comp333_433_truck_rental/opt/postgres_jdbc_driver/postgresql-42.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,11 +1,11 @@
 package com.truck.model.user;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 public class License {
 	private String licenseType;
 	private String licenseNumber;
-	private LocalDateTime expirationDate;
+	private Date expirationDate;
 	
 	public String getLicenceType() {
 		return licenseType;
@@ -23,11 +23,11 @@ public class License {
 		this.licenseNumber = licenseNumber;
 	}
 
-	public LocalDateTime getDateOfBirth() {
+	public Date getExpirationDate() {
 		return expirationDate;
 	}
 	
-	public void setDateOfBirth(LocalDateTime date) {
+	public void setExpirationDate(Date date) {
 		this.expirationDate = date;
 	}
 }
