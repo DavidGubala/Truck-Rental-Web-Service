@@ -6,7 +6,7 @@ import java.util.List;
 import com.truck.model.order.Order;
 import com.truck.model.product.Product;
 
-public class Partner {
+public class Partner extends User {
 	private int partnerId;
 	private List<Product> products = new ArrayList<Product>();
 	

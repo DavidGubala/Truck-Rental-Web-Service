@@ -1,6 +1,6 @@
 package com.truck.model.user;
 
-public class Employee {
+public class Employee extends User{
 	private int employeeId;
 	private int ssn;
 	private String employmentType;
