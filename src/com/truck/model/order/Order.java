@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-	private int orderId;
-	private List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-	private LocalDateTime orderDate;
-	private String orderStatus="Open";
-	private Customer customer;
-	private Reservation reservaton;
-	private Transaction transaction;
+	private int orderId; 				// Each order located by and ID
+	private LocalDateTime orderDate;	// Date Order was placed
+	private String orderStatus="Open";	// Current Status of Order
+	private Customer customer;			// Customer the order is for
+	private Product product;			// Product the Customer is ordering
+	private Reservation reservaton;		// Reservation information 
+	private Transaction transaction;	// Transaction information
 	
 	
 	public int getOrderId() {
@@ -23,12 +23,13 @@ public class Order {
 	public void setOrderId(int id) {
 		this.orderId = id;
 	}
-	public List<OrderDetail> getOrderDetails() {
-		return orderDetails;
+	
+	public Product getProduct() {
+		return product;
 	}
-
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
+	
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 	public LocalDateTime getDate() {
@@ -39,14 +40,6 @@ public class Order {
 		this.orderDate = date;
 	}
 	
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public void setOrderStatus(String status) {
-		this.orderStatus = status;
-	}
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -71,37 +64,49 @@ public class Order {
 		this.transaction = transaction;
 	}
 	
-	public void addProduct(Product product) {
-		if (orderStatus.equals("Open")) {
-			orderDetails.add(new OrderDetail());
-		} else {
-			throw new IllegalStateException("Can only add product in Open state.");
-		}
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 	
-	public void cancelOrder() {
-		if (orderStatus.equals("Open") || orderStatus.equals("Ordered")) {
-			orderStatus = "Canceled";
+	private String setOrderStatus(String status) {
+		this.orderStatus = status;
+		return orderStatus;
+	}
+	
+	// Everything below is for setting the order status which can only be set from within here
+	public void orderCancel() { //  Cancel order, self explanatory
+		if (getOrderStatus().equals("Ordered") || getOrderStatus().equals("Ready")) {
+			setOrderStatus("Canceled");
 		} else {
 			throw new IllegalStateException("Cannot cancel order in this state.");
 		}
 	}
 	
-	public void confirmOrder() {
-		if (getOrderDetails().isEmpty()) {
-			orderStatus = "Canceled";
-		} else if (orderStatus.equals("Open")) {
-			orderStatus = "Ordered";
+	public void orderReady() { // Order payment has been processed/ or alternatively the Order is just ready for pick up. After this we would give the customer reservation information
+		if (getOrderStatus().equals("Ordered")) {
+			setOrderStatus("Ready");
 		} else {
-			throw new IllegalStateException("Cannot confirm order in this state.");
+			throw new IllegalStateException("Cannot ready order in this state.");
+		}
+	}
+	
+	public void orderShipping() { // Shipping would reference the time at which the customer has picked up the vehicle and is currently using it.
+		if (getOrderStatus().equals("Ready")) {
+			setOrderStatus("Shipping");
+		} else {
+			throw new IllegalStateException("Cannot ship order in this state.");
+		}
+	}
+	
+	public void orderReturn() { // Return would reference the time at which the customer returns the vehicle to drop-off location.
+		if (getOrderStatus().equals("Shipping")) {
+			setOrderStatus("Return");
+		} else {
+			throw new IllegalStateException("Cannot return order in this state.");
 		}
 	}
 	
 	public double getOrderTotal() {
-		double total = 0.00;
-		for (OrderDetail line : orderDetails) {
-			total += line.getProduct().getPricePerMile();
-		}
-		return total;
+		return getProduct().getPricePerMile(); //  dummy value for now until we work out pricing options. Price per mile/price per hour/day?
 	}
 }

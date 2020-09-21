@@ -30,7 +30,7 @@ public class DBHelper {
  
 		try {
  
-			connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/BookStore", "student", "Comp442");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/TruckingCompany", "postgres", "ted");
 				Statement st = connection.createStatement();
 				ResultSet rs = st.executeQuery("SELECT VERSION()");
 
