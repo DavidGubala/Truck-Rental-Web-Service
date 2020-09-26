@@ -7,7 +7,7 @@ import com.truck.model.product.Product;
 public class ProductManager {
 	private ProductDAO prodDAO = new ProductDAO();
 	
-	public Product findProductById(String productId) {
+	public Product findProductById(int productId) {
 		
 		try {
 			Product product = prodDAO.getProduct(productId);
