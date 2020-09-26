@@ -15,7 +15,7 @@ public class TruckRentalClient {
 	        Customer customer = new Customer();
 			customer.setFirstName("Michael");
 	        customer.setLastName("Gerard");
-	        customer.setDriverLicense("AY2345"); //need variable of License type, will fix it later -Ted
+	        //customer.setDriverLicense("AY2345"); //need variable of License type, will fix it later -Ted
 	        
 	        Address billingAddress = new Address();
 	        billingAddress.setStreet("500 West Madison St.");
