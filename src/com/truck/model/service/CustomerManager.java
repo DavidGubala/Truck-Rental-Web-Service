@@ -13,7 +13,7 @@ public class CustomerManager {
 		try {
 			custDAO.addCustomer(customer);
 	    } catch (Exception se) {
-	      System.err.println("CustomerService: Threw a Exception retrieving customer.");
+	      System.err.println("CustomerManager: Threw a Exception adding customer.");
 	      System.err.println(se.getMessage());
 	    }
 	}
@@ -24,7 +24,7 @@ public class CustomerManager {
 			Customer customer = custDAO.getCustomer(customerId);
 	    	return customer;
 	    } catch (Exception se) {
-	      System.err.println("CustomerService: Threw a Exception retrieving customer.");
+	      System.err.println("CustomerManager: Threw a Exception retrieving customer.");
 	      System.err.println(se.getMessage());
 	    }
 		return null;

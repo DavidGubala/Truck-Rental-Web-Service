@@ -17,16 +17,16 @@ public class PartnerDAO {
 		
 	}
 	// Read
-	public Partner getPartner(int PartnerId) {
+	public Partner getPartner(int partnerId) {
 		Partner placeholder = new Partner();
 		return placeholder;
 	}
 	// Update
-	public void EditPartner(Partner par) {
+	public void editPartner(Partner par) {
 		
 	}	
 	// Delete
-	public void deletePartner(int PartnerId) {
+	public void deletePartner(int partnerId) {
 		
 	}
 }

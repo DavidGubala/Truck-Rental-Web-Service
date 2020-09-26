@@ -28,7 +28,7 @@ public class ProductDAO {
 		
 	}	
 	// Delete
-	public void deletePartner(int probId) {
+	public void deleteProduct(int probId) {
 		
 	}
 }

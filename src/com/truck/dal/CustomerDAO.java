@@ -184,21 +184,22 @@ public class CustomerDAO {
 		 * 
 		 * --I chose Option 2 for now -David
 		 * 
-		 * */ 
+		 * 
 		
         PreparedStatement custPst = null;
         PreparedStatement billAddPst = null;
         PreparedStatement homeAddPST = null;
         int customerId = cust.getCustomerId();
-        
+        */
 	}
 	// Delete
 	public void deleteCustomer(int customerId) {
+		
 		int homeAddId,billAddId;
         PreparedStatement custDEL = null;
         PreparedStatement billAddDEL = null;
         PreparedStatement homeAddDEL = null;
-
+        /*
         try {
         	Statement st = DBHelper.getConnection().createStatement();
         	
@@ -234,7 +235,7 @@ public class CustomerDAO {
       	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
     	      System.err.println(ex.getMessage());
             }
-        }
+        }*/
 	}
         
 }
