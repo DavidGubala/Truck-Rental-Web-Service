@@ -9,9 +9,9 @@ public class OrderManager {
 	private OrderDAO orderDAO = new OrderDAO();
 
 	// Create
-	public void createOrder() {
+	public void createOrder(Order order) {
 		try {
-			ordervDAO.createOrder();
+			orderDAO.creteOrder(order);
 	    } catch (Exception se) {
 	      System.err.println("OrderManager: Threw a Exception creating order.");
 	      System.err.println(se.getMessage());
