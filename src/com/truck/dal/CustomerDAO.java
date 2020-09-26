@@ -9,13 +9,85 @@ import java.sql.Statement;
 import com.truck.model.user.*;
 
 public class CustomerDAO {
+	/*
+	 * Under Construction
+	 * */
 	public CustomerDAO() {}
 	
-	/* getCustomer Status:  Under Construction
-	 * 
-	 * We could work on getting customer information by more than just a customer id? -d
-	 */
-	public Customer getCustomer(String customerId) {
+	// Create
+	public void addCustomer(Customer cust) { 
+		Connection con = DBHelper.getConnection();
+        PreparedStatement custPst = null;
+        PreparedStatement billAddPst = null;
+        PreparedStatement homeAddPST = null;
+
+        try {
+        	//Insert the customer object
+            String custStm = "INSERT INTO Customer(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, driverLicenseType, licenseNumber, licenseExpirattionDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            custPst = con.prepareStatement(custStm);
+            custPst.setInt(1, cust.getCustomerId());
+            custPst.setString(2, cust.getFirstName());
+            custPst.setString(3, cust.getLastName());
+            custPst.setDate(4, cust.getDateOfBirth());
+            custPst.setInt(5, cust.getHomeAddress().getAddressId());
+            custPst.setInt(6, cust.getBillingAddress().getAddressId());
+            custPst.setString(7, cust.getPhone().getNumber());
+            custPst.setString(8, cust.getPhone().getPhoneType());
+            custPst.setString(9, cust.getEmail()); 
+            custPst.setString(10, cust.getDriverLicense().getLicenceType());
+            custPst.setString(11, cust.getDriverLicense().getLicenceNumber());
+            custPst.setDate(12, cust.getDriverLicense().getExpirationDate());
+            custPst.executeUpdate();
+
+        	//Insert the customer Billing Address object
+            String billAddStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            billAddPst = con.prepareStatement(billAddStm);
+            billAddPst.setInt(1, cust.getCustomerId());
+            billAddPst.setInt(2, cust.getBillingAddress().getAddressId());  
+            billAddPst.setString(3, cust.getBillingAddress().getStreet());       
+            billAddPst.setString(4, cust.getBillingAddress().getUnit());  
+            billAddPst.setString(5, cust.getBillingAddress().getCity());  
+            billAddPst.setString(6, cust.getBillingAddress().getState());      
+            billAddPst.setString(7, cust.getBillingAddress().getZip());  
+            billAddPst.executeUpdate();
+            
+          //Insert the customer Home Address object
+            String homeAddStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            homeAddPST = con.prepareStatement(homeAddStm);
+            homeAddPST.setInt(1, cust.getCustomerId());
+            homeAddPST.setInt(2, cust.getHomeAddress().getAddressId());  
+            homeAddPST.setString(3, cust.getHomeAddress().getStreet());       
+            homeAddPST.setString(4, cust.getHomeAddress().getUnit());
+            homeAddPST.setString(5, cust.getHomeAddress().getCity());  
+            homeAddPST.setString(6, cust.getHomeAddress().getState());      
+            homeAddPST.setString(7, cust.getHomeAddress().getZip());
+            homeAddPST.executeUpdate();
+        } catch (SQLException ex) {
+
+        } finally {
+
+            try {
+                if (billAddPst != null) {
+                	billAddPst.close();
+                }
+                if (homeAddPST != null) {
+                	homeAddPST.close();
+                }
+                if (custPst != null) {
+                	custPst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+    	      System.err.println(ex.getMessage());
+            }
+        }
+    }
+	// Read
+	public Customer getCustomer(int customerId) {
 		 	 
 	    try { 		
 	    	//Get Customer
@@ -99,73 +171,63 @@ public class CustomerDAO {
 	    
 	    return null;
 	  }
-	
-	
-	
-	
-	public void addCustomer(Customer cust) {
-		Connection con = DBHelper.getConnection();
+	// Update
+	public void EditCustomer( Customer cust) { 
+		/*
+		 * This can only be called by customers logged in, so when the customer chooses to edit their account information, 
+		 * they will be met with a form prefilled with the data related to their account. They can then change whatever 
+		 * information needs to be changed and send the put request as a new customer 
+		 * 
+		 * I think we have two options here:
+		 * 1. Take in the new customer find the customer info in the database, compare each variable and make changes
+		 * 2. Or delete the old customer data and replace with new Customer
+		 * 
+		 * --I chose Option 2 for now -David
+		 * 
+		 * */ 
+		
         PreparedStatement custPst = null;
         PreparedStatement billAddPst = null;
         PreparedStatement homeAddPST = null;
+        int customerId = cust.getCustomerId();
+        
+	}
+	// Delete
+	public void deleteCustomer(int customerId) {
+		int homeAddId,billAddId;
+        PreparedStatement custDEL = null;
+        PreparedStatement billAddDEL = null;
+        PreparedStatement homeAddDEL = null;
 
         try {
-        	//Insert the customer object
-            String custStm = "INSERT INTO Customer(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, driverLicenseType, licenseNumber, licenseExpirattionDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            custPst = con.prepareStatement(custStm);
-            custPst.setInt(1, cust.getCustomerId());
-            custPst.setString(2, cust.getFirstName());
-            custPst.setString(3, cust.getLastName());
-            custPst.setDate(4, cust.getDateOfBirth());
-            custPst.setInt(5, cust.getHomeAddress().getAddressId());
-            custPst.setInt(6, cust.getBillingAddress().getAddressId());
-            custPst.setString(7, cust.getPhone().getNumber());
-            custPst.setString(8, cust.getPhone().getPhoneType());
-            custPst.setString(9, cust.getEmail()); 
-            custPst.setString(10, cust.getDriverLicense().getLicenceType());
-            custPst.setString(11, cust.getDriverLicense().getLicenceNumber());
-            custPst.setDate(12, cust.getDriverLicense().getExpirationDate());
-            custPst.executeUpdate();
-
-        	//Insert the customer Billing Address object
-            String billAddStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            billAddPst = con.prepareStatement(billAddStm);
-            billAddPst.setInt(1, cust.getCustomerId());
-            billAddPst.setInt(2, cust.getBillingAddress().getAddressId());  
-            billAddPst.setString(3, cust.getBillingAddress().getStreet());       
-            billAddPst.setString(4, cust.getBillingAddress().getUnit());  
-            billAddPst.setString(5, cust.getBillingAddress().getCity());  
-            billAddPst.setString(6, cust.getBillingAddress().getState());      
-            billAddPst.setString(7, cust.getBillingAddress().getZip());  
-            billAddPst.executeUpdate();
+        	Statement st = DBHelper.getConnection().createStatement();
+        	
+        	// find all associated info to delete : billaddress and homeaddress
+        	
+        	String selectCustomerQuery = "SELECT (homeAddressID, billAddressID) FROM Customer WHERE ID = '" + customerId + "'";
+        	ResultSet custRS = st.executeQuery(selectCustomerQuery);      
+	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
+	    	
+	    	
+        	
+            String custDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+            st.executeQuery(custDELStm);
             
-          //Insert the customer Home Address object
-            String homeAddStm = "INSERT INTO Address(customerID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            homeAddPST = con.prepareStatement(homeAddStm);
-            homeAddPST.setInt(1, cust.getCustomerId());
-            homeAddPST.setInt(2, cust.getHomeAddress().getAddressId());  
-            homeAddPST.setString(3, cust.getHomeAddress().getStreet());       
-            homeAddPST.setString(4, cust.getHomeAddress().getUnit());
-            homeAddPST.setString(5, cust.getHomeAddress().getCity());  
-            homeAddPST.setString(6, cust.getHomeAddress().getState());      
-            homeAddPST.setString(7, cust.getHomeAddress().getZip());
-            homeAddPST.executeUpdate();
+            st.close();
+            String homeAddressDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+            st.executeQuery(homeAddressDELStm);
+            
+            String billAddDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+            st.executeQuery(billAddDELStm);
+            
+            custDEL.executeUpdate();
         } catch (SQLException ex) {
 
         } finally {
 
             try {
-                if (billAddPst != null) {
-                	billAddPst.close();
-                }
-                if (homeAddPST != null) {
-                	homeAddPST.close();
-                }
-                if (custPst != null) {
-                	custPst.close();
-                }
-                if (con != null) {
-                    con.close();
+                if (st != null) {
+                	st.close();
                 }
 
             } catch (SQLException ex) {
@@ -173,5 +235,6 @@ public class CustomerDAO {
     	      System.err.println(ex.getMessage());
             }
         }
-    }
+	}
+        
 }
