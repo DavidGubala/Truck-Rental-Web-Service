@@ -116,7 +116,7 @@ public class CustomerDAO {
 	    	  phone.setNumber(custRS.getString("phoneNumber"));							// Phone Number
 	    	  phone.setPhoneType(custRS.getString("phoneType"));						// Phone Type
 	    	  customer.setPhone(phone);
-	    	  customer.setEmail("email");												// Email Address
+	    	  customer.setEmail(custRS.getString("email"));												// Email Address
 	    	  license.setLicenseType(custRS.getString("driverLicenseType"));			// Driver License Type/Classes
 	    	  license.setLicenseNumber(custRS.getString("licenseNumber"));				// License Number
 	    	  license.setExpirationDate(custRS.getDate("licenseExpirattionDate"));		// License Expiration Date
