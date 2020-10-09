@@ -1,11 +1,11 @@
-package com.truck.view;
+package com.truck.order.client;
 
 import java.util.List;
 
-import com.truck.model.user.Address;
-import com.truck.model.user.Customer;
-import com.truck.model.order.Order;
-import com.truck.model.product.Vehicle;
+import com.truck.order.Order;
+import com.truck.product.Vehicle;
+import com.truck.user.Address;
+import com.truck.user.Customer;
 
 
 public class TruckRentalClient {

@@ -1,7 +1,8 @@
-package com.truck.model.order;
+package com.truck.order;
 
-import com.truck.model.product.Product;
-import com.truck.model.user.Customer;
+import com.truck.product.Product;
+import com.truck.user.Customer;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

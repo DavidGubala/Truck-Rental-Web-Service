@@ -1,7 +1,7 @@
-package com.truck.model.service;
+package com.truck.user;
 
 import com.truck.dal.*;
-import com.truck.model.product.Product;
+import com.truck.product.Product;
 
 public class InventoryManager {
 	

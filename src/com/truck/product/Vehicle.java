@@ -1,4 +1,4 @@
-package com.truck.model.product;
+package com.truck.product;
 
 public class Vehicle extends Product {
 	private String plateNumber;

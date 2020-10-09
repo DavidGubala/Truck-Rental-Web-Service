@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.model.user.*;
+import com.truck.user.Address;
+import com.truck.user.Benefits;
+import com.truck.user.Employee;
+import com.truck.user.Partner;
+import com.truck.user.Phone;
 
 public class EmployeeDAO {
 	/*

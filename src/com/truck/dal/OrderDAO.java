@@ -1,6 +1,6 @@
 package com.truck.dal;
 
-import com.truck.model.order.*;
+import com.truck.order.Order;
 
 public class OrderDAO {
 	/*

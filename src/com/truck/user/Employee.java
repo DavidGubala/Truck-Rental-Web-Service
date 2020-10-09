@@ -1,4 +1,4 @@
-package com.truck.model.user;
+package com.truck.user;
 
 public class Employee extends User{
 	private int employeeId;

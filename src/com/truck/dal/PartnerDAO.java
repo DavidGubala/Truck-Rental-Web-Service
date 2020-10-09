@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.model.user.*;
+import com.truck.user.Partner;
 
 public class PartnerDAO {
 	/*

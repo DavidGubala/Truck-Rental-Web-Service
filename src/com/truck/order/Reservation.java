@@ -1,4 +1,4 @@
-package com.truck.model.order;
+package com.truck.order;
 
 import java.time.LocalDateTime;
 import java.time.Duration;

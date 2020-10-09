@@ -1,9 +1,9 @@
-package com.truck.model.user;
+package com.truck.user;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.truck.model.order.Order;
+import com.truck.order.Order;
 
 
 public class Customer extends User{

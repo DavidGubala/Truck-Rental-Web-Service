@@ -1,10 +1,10 @@
-package com.truck.model.user;
+package com.truck.user;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.truck.model.order.Order;
-import com.truck.model.product.Product;
+import com.truck.order.Order;
+import com.truck.product.Product;
 
 public class Partner extends User {
 	private int partnerId;

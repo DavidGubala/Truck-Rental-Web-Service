@@ -1,6 +1,5 @@
-package com.truck.model.service;
+package com.truck.order;
 
-import com.truck.model.order.*;
 import com.truck.dal.OrderDAO;
 
 

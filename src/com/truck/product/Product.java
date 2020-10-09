@@ -1,4 +1,4 @@
-package com.truck.model.product;
+package com.truck.product;
 
 public class Product {
 	private int productId;

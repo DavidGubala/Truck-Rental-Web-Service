@@ -1,6 +1,5 @@
-package com.truck.model.service;
+package com.truck.user;
 
-import com.truck.model.user.*;
 import com.truck.dal.*;
 
 public class CustomerManager {

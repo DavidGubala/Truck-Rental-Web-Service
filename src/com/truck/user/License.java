@@ -1,4 +1,4 @@
-package com.truck.model.user;
+package com.truck.user;
 
 import java.sql.Date;
 

@@ -1,7 +1,8 @@
 package com.truck.dal;
 
 import java.util.ArrayList;
-import com.truck.model.product.Product;
+
+import com.truck.product.Product;
 
 public class InventoryDAO {
 	/*

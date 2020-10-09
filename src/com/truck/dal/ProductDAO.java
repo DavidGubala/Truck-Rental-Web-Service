@@ -1,14 +1,13 @@
 package com.truck.dal;
-import com.truck.model.product.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.model.product.*;
-import com.truck.model.user.Partner;
+import com.truck.product.*;
+import com.truck.product.Product;
+import com.truck.user.Partner;
 
 public class ProductDAO {
 	/*

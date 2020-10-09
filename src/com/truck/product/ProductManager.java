@@ -1,7 +1,6 @@
-package com.truck.model.service;
+package com.truck.product;
 
 import com.truck.dal.ProductDAO;
-import com.truck.model.product.Product;
 
 
 public class ProductManager {
