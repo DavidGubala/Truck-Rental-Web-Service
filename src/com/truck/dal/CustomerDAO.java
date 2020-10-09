@@ -12,9 +12,6 @@ import com.truck.user.License;
 import com.truck.user.Phone;
 
 public class CustomerDAO {
-	/*
-	 * Under Construction
-	 * */
 	public CustomerDAO() {}
 	
 	// Create
@@ -91,10 +88,13 @@ public class CustomerDAO {
     }
 	// Read
 	public Customer getCustomer(int customerId) {
-		 	 
+
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
 	    try { 		
 	    	//Get Customer
-	    	Statement st = DBHelper.getConnection().createStatement();
+	    	st = con.createStatement();
 	    	//String selectCustomerQuery = "SELECT ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, driverLicenseType, licenseNumber, licenseExpirattionDate FROM Customer WHERE customerID = '" + customerId + "'";
 	    	String selectCustomerQuery = "SELECT * FROM Customer WHERE ID = '" + customerId + "'"; // I assume this does the same as above, will test later -d
 
@@ -170,8 +170,18 @@ public class CustomerDAO {
 	      System.err.println("CustomerDAO: Threw a SQLException retrieving the customer object.");
 	      System.err.println(se.getMessage());
 	      se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+    	      System.err.println(ex.getMessage());
+            }
 	    }
-	    
 	    return null;
 	  }
 	// Update
@@ -187,44 +197,30 @@ public class CustomerDAO {
 		 * 
 		 * --I chose Option 2 for now -David
 		 * 
-		 * 
+		 * need to first delete then create
+		*/
 		
-        PreparedStatement custPst = null;
-        PreparedStatement billAddPst = null;
-        PreparedStatement homeAddPST = null;
         int customerId = cust.getCustomerId();
-        */
+        deleteCustomer(customerId);
+        addCustomer(cust);
 	}
 	// Delete
 	public void deleteCustomer(int customerId) {
+        Connection con = DBHelper.getConnection();
+		Statement st = null;
 		
-		int homeAddId,billAddId;
-        PreparedStatement custDEL = null;
-        PreparedStatement billAddDEL = null;
-        PreparedStatement homeAddDEL = null;
-        /*
         try {
-        	Statement st = DBHelper.getConnection().createStatement();
-        	
-        	// find all associated info to delete : billaddress and homeaddress
-        	
-        	String selectCustomerQuery = "SELECT (homeAddressID, billAddressID) FROM Customer WHERE ID = '" + customerId + "'";
-        	ResultSet custRS = st.executeQuery(selectCustomerQuery);      
-	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
-	    	
-	    	
+        	st = con.createStatement();
         	
             String custDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
             st.executeQuery(custDELStm);
             
-            st.close();
-            String homeAddressDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+            String homeAddressDELStm = "DELETE * FROM Address WHERE customerID = '" + customerId + "'";
             st.executeQuery(homeAddressDELStm);
             
-            String billAddDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+            String billAddDELStm = "DELETE * FROM Address WHERE customerID = '" + customerId + "'";
             st.executeQuery(billAddDELStm);
             
-            custDEL.executeUpdate();
         } catch (SQLException ex) {
 
         } finally {
@@ -238,7 +234,7 @@ public class CustomerDAO {
       	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
     	      System.err.println(ex.getMessage());
             }
-        }*/
+        }
 	}
         
 }
