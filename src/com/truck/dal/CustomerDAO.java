@@ -12,8 +12,6 @@ import com.truck.user.License;
 import com.truck.user.Phone;
 
 public class CustomerDAO {
-	public CustomerDAO() {}
-	
 	// Create
 	public void addCustomer(Customer cust) { 
 		Connection con = DBHelper.getConnection();
@@ -185,7 +183,7 @@ public class CustomerDAO {
 	    return null;
 	  }
 	// Update
-	public void EditCustomer( Customer cust) { 
+	public void editCustomer( Customer cust) { 
 		/*
 		 * This can only be called by customers logged in, so when the customer chooses to edit their account information, 
 		 * they will be met with a form prefilled with the data related to their account. They can then change whatever 

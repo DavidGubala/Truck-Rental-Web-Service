@@ -9,7 +9,6 @@ import java.sql.Statement;
 import com.truck.user.Address;
 import com.truck.user.Benefits;
 import com.truck.user.Employee;
-import com.truck.user.Partner;
 import com.truck.user.Phone;
 
 public class EmployeeDAO {
@@ -24,7 +23,7 @@ public class EmployeeDAO {
         PreparedStatement homeAddPST = null;
 
         try {
-        	//Insert the empomer object
+        	//Insert the employee object
             String empStm = "INSERT INTO Employee(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, employmentType, ssn, maritalStatus, benefitsId ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             empPst = con.prepareStatement(empStm);
             empPst.setInt(1, emp.getEmployeeId());
@@ -42,7 +41,7 @@ public class EmployeeDAO {
             empPst.setInt(13, emp.getBenefits().getBenefitId());
             empPst.executeUpdate();
             
-          //Insert the eployee Billing Address object
+          //Insert the employee Billing Address object
             String billAddStm = "INSERT INTO Address(employeeID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
             billAddPst = con.prepareStatement(billAddStm);
             billAddPst.setInt(1, emp.getEmployeeId());
@@ -85,17 +84,20 @@ public class EmployeeDAO {
 				}
 
             } catch (SQLException ex) {
-      	      System.err.println("EmployeeDAO: Threw a SQLException saving the empomer object.");
+      	      System.err.println("EmployeeDAO: Threw a SQLException saving the Employee object.");
     	      System.err.println(ex.getMessage());
             }
         }
     }
 	// Read
 	public Employee getEmployee(String employeeId) {
-		 	 
+
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
 	    try { 		
 	    	// Get Employee via Employee ID
-	    	Statement st = DBHelper.getConnection().createStatement();
+	    	st = con.createStatement();
 	    	String selectempomerQuery = "SELECT * FROM Employee WHERE ID = '" + employeeId + "'";
 
 	    	ResultSet empRS = st.executeQuery(selectempomerQuery);      
@@ -182,19 +184,59 @@ public class EmployeeDAO {
 	      return employee;
 	    }	    
 	    catch (SQLException se) {
-	      System.err.println("empomerDAO: Threw a SQLException retrieving the empomer object.");
+	      System.err.println("EmplyeeDAO: Threw a SQLException retrieving the employee object.");
 	      System.err.println(se.getMessage());
 	      se.printStackTrace();
+	    }finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("EmployeeDAO: Threw a SQLException saving the Employee object.");
+    	      System.err.println(ex.getMessage());
+            }
 	    }
-	    
 	    return null;
 	  }
 	// Update
-	public void EditPartner(Partner par) {
-		
+	public void EditPartner(Employee emp) {
+		int empId = emp.getEmployeeId();
+		deleteEmployee(empId);
+		addEmployee(emp);
 	}	
 	// Delete
-	public void deletePartner(Partner par) {
+	public void deleteEmployee(int employeeId) {
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
 		
+        try {
+        	st = con.createStatement();
+        	
+            String empDELStm = "DELETE * FROM Customer WHERE ID = '" + employeeId + "'";
+            st.executeQuery(empDELStm);
+            
+            String homeAddressDELStm = "DELETE * FROM Address WHERE customerID = '" + employeeId + "'";
+            st.executeQuery(homeAddressDELStm);
+            
+            String billAddDELStm = "DELETE * FROM Address WHERE customerID = '" + employeeId + "'";
+            st.executeQuery(billAddDELStm);
+            
+        } catch (SQLException ex) {
+
+        } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+    	      System.err.println(ex.getMessage());
+            }
+        }
 	}
 }
