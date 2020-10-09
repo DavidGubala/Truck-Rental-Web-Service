@@ -6,21 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.user.Address;
 import com.truck.user.Benefits;
 import com.truck.user.Employee;
 import com.truck.user.Phone;
 
 public class EmployeeDAO {
-	/*
-	 * Under Construction
-	 * */
+    AddressDAO addDAO = new AddressDAO();
 	// Create
 	public void addEmployee(Employee emp) {
 		Connection con = DBHelper.getConnection();
         PreparedStatement empPst = null;
-        PreparedStatement billAddPst = null;
-        PreparedStatement homeAddPST = null;
 
         try {
         	//Insert the employee object
@@ -41,41 +36,14 @@ public class EmployeeDAO {
             empPst.setInt(13, emp.getBenefits().getBenefitId());
             empPst.executeUpdate();
             
-          //Insert the employee Billing Address object
-            String billAddStm = "INSERT INTO Address(employeeID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            billAddPst = con.prepareStatement(billAddStm);
-            billAddPst.setInt(1, emp.getEmployeeId());
-            billAddPst.setInt(2, emp.getBillingAddress().getAddressId());  
-            billAddPst.setString(3, emp.getBillingAddress().getStreet());       
-            billAddPst.setString(4, emp.getBillingAddress().getUnit());  
-            billAddPst.setString(5, emp.getBillingAddress().getCity());  
-            billAddPst.setString(6, emp.getBillingAddress().getState());      
-            billAddPst.setString(7, emp.getBillingAddress().getZip());  
-            billAddPst.executeUpdate();
-            
-          //Insert the employee Home Address object
-            String homeAddStm = "INSERT INTO Address(employeeID, addressID, street, unit, city, state, zip) VALUES(?, ?, ?, ?, ?, ?, ?)";
-            homeAddPST = con.prepareStatement(homeAddStm);
-            homeAddPST.setInt(1, emp.getEmployeeId());
-            homeAddPST.setInt(2, emp.getHomeAddress().getAddressId());  
-            homeAddPST.setString(3, emp.getHomeAddress().getStreet());       
-            homeAddPST.setString(4, emp.getHomeAddress().getUnit());
-            homeAddPST.setString(5, emp.getHomeAddress().getCity());  
-            homeAddPST.setString(6, emp.getHomeAddress().getState());      
-            homeAddPST.setString(7, emp.getHomeAddress().getZip());
-            homeAddPST.executeUpdate();
+            addDAO.addAddress(emp.getHomeAddress(), emp.getEmployeeId());
+            addDAO.addAddress(emp.getBillingAddress(), emp.getEmployeeId());
 
         } catch (SQLException ex) {
 
         } finally {
 
             try {
-            	if (billAddPst != null) {
-				 	billAddPst.close();
-				}
-				if (homeAddPST != null) {
-					homeAddPST.close();
-				}
 				if (empPst != null) {
 					empPst.close();
 				}
@@ -105,8 +73,6 @@ public class EmployeeDAO {
 	    	
 	      //Get Employee
     	  Employee employee = new Employee();
-    	  Address homeAdd = new Address();
-    	  Address billAdd = new Address();
     	  Phone phone = new Phone();
     	  Benefits benefits = new Benefits();
     	  
@@ -115,8 +81,6 @@ public class EmployeeDAO {
 	    	  employee.setLastName(empRS.getString("firstName"));						// First Name
 	    	  employee.setFirstName(empRS.getString("lastName"));						// Last Name
 	    	  employee.setDateOfBirth(empRS.getDate("dateOfBirth"));					// DOB
-	    	  homeAdd.setAddressId(empRS.getInt("homeAddressID"));						// Home Address
-	    	  billAdd.setAddressId(empRS.getInt("billingAddressID"));					// Billing Address
 	    	  phone.setNumber(empRS.getString("phoneNumber"));							// Phone Number
 	    	  phone.setPhoneType(empRS.getString("phoneType"));							// Phone Type
 	    	  employee.setPhone(phone);
@@ -127,42 +91,8 @@ public class EmployeeDAO {
 	      }
 	      //close to manage resources
 	      empRS.close();
-	      	    		  
-	      //Get Home Address
-	      String selectHomeAddressQuery = "SELECT * FROM Address WHERE ID = '" + employee.getHomeAddress().getAddressId() + "'";
-	      ResultSet homeAddRS = st.executeQuery(selectHomeAddressQuery);
-    	  
-    	  System.out.println("empomerDAO: *************** Query " + selectHomeAddressQuery);
-    	  
-	      while ( homeAddRS.next() ) {								// Home Address Info Gathered
-	    	  homeAdd.setStreet(homeAddRS.getString("street"));		// Street
-	    	  homeAdd.setUnit(homeAddRS.getString("unit"));			// Unit
-	    	  homeAdd.setCity(homeAddRS.getString("city"));			// City
-	    	  homeAdd.setState(homeAddRS.getString("state"));		// State
-	    	  homeAdd.setZip(homeAddRS.getString("zip"));			// postal code
-	      }
-	      
-	      employee.setHomeAddress(homeAdd);
-	      //close to manage resources
-	      homeAddRS.close();
-	      
-	      //Get Bill Address
-	      String selectBillAddressQuery = "SELECT * FROM Address WHERE ID = '" + employee.getBillingAddress().getAddressId() + "'";
-	      ResultSet billAddRS = st.executeQuery(selectBillAddressQuery);
-    	  
-    	  System.out.println("empomerDAO: *************** Query " + selectBillAddressQuery);
-    	  
-	      while ( billAddRS.next() ) {								// Bill Address Info Gathered
-	    	  billAdd.setStreet(billAddRS.getString("street"));		// Street
-	    	  billAdd.setUnit(billAddRS.getString("unit"));			// Unit
-	    	  billAdd.setCity(billAddRS.getString("city"));			// City
-	    	  billAdd.setState(billAddRS.getString("state"));		// State
-	    	  billAdd.setZip(billAddRS.getString("zip"));			// postal code
-	      }
-	      
-	      employee.setBillingAddress(billAdd);
-	      //close to manage resources
-	      billAddRS.close();
+	      employee.setHomeAddress(addDAO.getAddress(empRS.getInt("homeAddressID")));
+	      employee.setBillingAddress(addDAO.getAddress(empRS.getInt("billingAddressID")));
 	      
 	      //Get Benefits Info 
 	      String selectBenefitsQuery = "SELECT * FROM Benefits WHERE ID = '" + benefits.getBenefitId() + "'";
@@ -176,7 +106,6 @@ public class EmployeeDAO {
 	      }
 	      
 	      employee.setBenefits(benefits);
-	      //close to manage resources
 	      benefitsRS.close();
 	      
 	      st.close();
@@ -217,12 +146,6 @@ public class EmployeeDAO {
         	
             String empDELStm = "DELETE * FROM Customer WHERE ID = '" + employeeId + "'";
             st.executeQuery(empDELStm);
-            
-            String homeAddressDELStm = "DELETE * FROM Address WHERE customerID = '" + employeeId + "'";
-            st.executeQuery(homeAddressDELStm);
-            
-            String billAddDELStm = "DELETE * FROM Address WHERE customerID = '" + employeeId + "'";
-            st.executeQuery(billAddDELStm);
             
         } catch (SQLException ex) {
 

@@ -3,9 +3,6 @@ package com.truck.dal;
 import com.truck.order.Order;
 
 public class OrderDAO {
-	/*
-	 * Under Construction
-	 * */
 	// Create
 	public void creteOrder(Order ord) {
 		

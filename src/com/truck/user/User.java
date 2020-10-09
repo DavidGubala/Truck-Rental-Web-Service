@@ -11,7 +11,6 @@ public class User {
 	private Address billingAddress;
 	private Phone phone;
 	private String email;
-	private String userType;
 	private Date dateOfBirth;
 	
 	public String getFirstName() {
@@ -69,14 +68,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	public String getUserType() {
-		return userType;
-	}
-
-	public void setUserType(String userType) {
-		this.userType = userType;
 	}
 	
 	public Date getDateOfBirth() {

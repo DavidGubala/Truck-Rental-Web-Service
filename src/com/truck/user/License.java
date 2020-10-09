@@ -6,6 +6,7 @@ public class License {
 	private String licenseType;
 	private String licenseNumber;
 	private Date expirationDate;
+	private boolean expired;
 	
 	public String getLicenceType() {
 		return licenseType;
@@ -29,5 +30,18 @@ public class License {
 	
 	public void setExpirationDate(Date date) {
 		this.expirationDate = date;
+	}
+	
+	public boolean isExpired() {
+		java.util.Date today = new Date(System.currentTimeMillis());
+		java.util.Date sqlDate = new java.util.Date(expirationDate.getTime());
+		
+		if(today.compareTo(sqlDate) > 0) {
+			expired = true;
+		}else {
+			expired = false;
+		}
+		
+		return expired;
 	}
 }

@@ -8,8 +8,8 @@ import com.truck.product.Product;
 
 public class Partner extends User {
 	private int partnerId;
-	private int inventoryId;
-	private List<Product> products = new ArrayList<Product>();
+	private List<Product> inventory = new ArrayList<Product>();
+	private List<Order> orders = new ArrayList<Order>();
 	
 	public int getPartnerId() {
 		return partnerId;
@@ -19,15 +19,27 @@ public class Partner extends User {
 		this.partnerId = id;
 	}
 	
-	public void addProduct(Product product) {
-		products.add(product);
+	public List<Product> getInventory() {
+		return inventory;
 	}
 	
-	public int getInventoryId() {
-		return inventoryId;
+	public void setInventory(List<Product> inv) {
+		this.inventory = inv;
 	}
 	
-	public void setInvenotoryId(int id) {
-		this.inventoryId = id;
+	public void addProduct(Product prod) {
+		inventory.add(prod);
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
+	public void addOrders(Order ord) {
+		orders.add(ord);
 	}
 }

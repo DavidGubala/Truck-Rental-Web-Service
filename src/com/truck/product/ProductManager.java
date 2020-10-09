@@ -1,6 +1,6 @@
 package com.truck.product;
 
-import com.truck.dal.ProductDAO;
+import com.truck.dal.*;
 
 
 public class ProductManager {
