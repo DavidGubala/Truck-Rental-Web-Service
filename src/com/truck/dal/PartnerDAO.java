@@ -61,38 +61,38 @@ public class PartnerDAO {
 		Statement st = null;
 		
 	    try { 		
-	    	//Get Partner
-	    	st = con.createStatement();
-	    	String selectPartnerQuery = "SELECT * FROM Partner WHERE ID = '" + partnerId + "'";
-
-	    	ResultSet PartRS = st.executeQuery(selectPartnerQuery);      
-	    	System.out.println("PartnerDAO: *************** Query " + selectPartnerQuery);
+			//Get Partner
+			st = con.createStatement();
+			String selectPartnerQuery = "SELECT * FROM Partner WHERE ID = '" + partnerId + "'";
+			
+			ResultSet PartRS = st.executeQuery(selectPartnerQuery);      
+			System.out.println("PartnerDAO: *************** Query " + selectPartnerQuery);
 	    	
-	      //Get Partner
-    	  Partner Partner = new Partner();
-    	  Phone phone = new Phone();
+			//Get Partner
+			Partner Partner = new Partner();
+			Phone phone = new Phone();
     	  
-	      while ( PartRS.next() ) {														// Partner Info Gathered
-	    	  Partner.setPartnerId(PartRS.getInt("ID"));								// ID
-	    	  Partner.setLastName(PartRS.getString("firstName"));						// First Name
-	    	  Partner.setFirstName(PartRS.getString("lastName"));						// Last Name
-	    	  Partner.setDateOfBirth(PartRS.getDate("dateOfBirth"));					// DOB
-	    	  phone.setNumber(PartRS.getString("phoneNumber"));							// Phone Number
-	    	  phone.setPhoneType(PartRS.getString("phoneType"));						// Phone Type
-	    	  Partner.setPhone(phone);
-	    	  Partner.setEmail(PartRS.getString("email"));								// Email Address
-	      }
-	      //close to manage resources
-	      PartRS.close();
-	      Partner.setHomeAddress(addDAO.getAddress(PartRS.getInt("homeAddressID")));
-	      Partner.setBillingAddress(addDAO.getAddress(PartRS.getInt("homeAddressID")));
-	      st.close();
-	      return Partner;
+			while ( PartRS.next() ) {														// Partner Info Gathered
+				Partner.setPartnerId(PartRS.getInt("ID"));								// ID
+				Partner.setLastName(PartRS.getString("firstName"));						// First Name
+				Partner.setFirstName(PartRS.getString("lastName"));						// Last Name
+				Partner.setDateOfBirth(PartRS.getDate("dateOfBirth"));					// DOB
+				phone.setNumber(PartRS.getString("phoneNumber"));							// Phone Number
+				phone.setPhoneType(PartRS.getString("phoneType"));						// Phone Type
+				Partner.setPhone(phone);
+				Partner.setEmail(PartRS.getString("email"));								// Email Address
+			}
+			//close to manage resources
+			PartRS.close();
+	      	Partner.setHomeAddress(addDAO.getAddress(PartRS.getInt("homeAddressID")));
+	      	Partner.setBillingAddress(addDAO.getAddress(PartRS.getInt("homeAddressID")));
+	      	st.close();
+	      	return Partner;
 	    }	    
 	    catch (SQLException se) {
-	      System.err.println("PartnerDAO: Threw a SQLException retrieving the Partner object.");
-	      System.err.println(se.getMessage());
-	      se.printStackTrace();
+	    	System.err.println("PartnerDAO: Threw a SQLException retrieving the Partner object.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
 	    } finally {
 
             try {
@@ -101,8 +101,8 @@ public class PartnerDAO {
                 }
 
             } catch (SQLException ex) {
-      	      System.err.println("PartnerDAO: Threw a SQLException saving the Partner object.");
-    	      System.err.println(ex.getMessage());
+            	System.err.println("PartnerDAO: Threw a SQLException saving the Partner object.");
+            	System.err.println(ex.getMessage());
             }
 	    }
 	    return null;

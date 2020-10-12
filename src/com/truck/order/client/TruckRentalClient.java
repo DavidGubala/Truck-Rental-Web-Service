@@ -44,7 +44,7 @@ public class TruckRentalClient {
 	        product1.setYear(2018);
 	        product1.setPricePerMile(10.00);
 	        //Add product to order
-	        order1.setProduct(product1);
+	        order1.setVehicle(product1);
 	        
 	        //Second product
 	        Vehicle product2 = new Vehicle();
@@ -55,7 +55,7 @@ public class TruckRentalClient {
 	        product2.setPlateNumber("IL7227");
 	        product2.setPricePerMile(15.00);
 	        //Add the products detail to Order
-	        order1.setProduct(product2);
+	        order1.setVehicle(product2);
 	        
 	        //finish order	        
 	        order1.orderReady();
@@ -78,7 +78,7 @@ public class TruckRentalClient {
 	        		billingAdd.getState() + " " + billingAdd.getZip() +
 	        		"\n");
 
-	        System.out.println("\tOrder Item: " + order1.getProduct());
+	        System.out.println("\tOrder Item: " + order1.getVehicle());
 
 	        System.out.println("\n\tOrder Total:\t\t" + orderTotal);
 	        

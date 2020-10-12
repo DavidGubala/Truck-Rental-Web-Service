@@ -1,18 +1,16 @@
 package com.truck.order;
 
-import com.truck.product.Product;
+import com.truck.product.Vehicle;
 import com.truck.user.Customer;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 
 public class Order {
 	private int orderId; 				// Each order located by and ID
-	private LocalDateTime orderDate;	// Date Order was placed
+	private Date orderDate;	// Date Order was placed
 	private String orderStatus="Open";	// Current Status of Order
 	private Customer customer;			// Customer the order is for
-	private Product product;			// Product the Customer is ordering
+	private Vehicle vehicle;			// Product the Customer is ordering
 	private Reservation reservaton;		// Reservation information 
 	private Transaction transaction;	// Transaction information
 	
@@ -25,19 +23,19 @@ public class Order {
 		this.orderId = id;
 	}
 	
-	public Product getProduct() {
-		return product;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 	
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 	
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return orderDate;
 	}
 	
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.orderDate = date;
 	}
 	
@@ -69,13 +67,12 @@ public class Order {
 		return orderStatus;
 	}
 	
-	private String setOrderStatus(String status) {
+	public String setOrderStatus(String status) {
 		this.orderStatus = status;
 		return orderStatus;
 	}
 	
-	// Everything below is for setting the order status which can only be set from within here
-	public void orderCancel() { //  Cancel order, self explanatory
+	public void orderCancel() { //  Cancel order
 		if (getOrderStatus().equals("Ordered") || getOrderStatus().equals("Ready")) {
 			setOrderStatus("Canceled");
 		} else {
@@ -108,6 +105,6 @@ public class Order {
 	}
 	
 	public double getOrderTotal() {
-		return getProduct().getPricePerMile(); //  dummy value for now until we work out pricing options. Price per mile/price per hour/day?
+		return getVehicle().getPricePerMile(); //  dummy value for now until we work out pricing options. Price per mile/price per hour/day?
 	}
 }

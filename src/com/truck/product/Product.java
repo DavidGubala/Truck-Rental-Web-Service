@@ -2,6 +2,7 @@ package com.truck.product;
 
 public class Product {
 	private int productId;
+	private String productType;
 	private double pricePerMile;
 	
 	public int getProductId() {
@@ -10,6 +11,14 @@ public class Product {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+	
+	public String getProductType() {
+		return productType;
+	}
+	
+	public void setProductType(String prodType) {
+		this.productType = prodType;
 	}
 	
 	public double getPricePerMile() {
