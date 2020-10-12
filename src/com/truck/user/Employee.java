@@ -1,5 +1,7 @@
 package com.truck.user;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Employee extends User{
 	private int employeeId;
 	private int ssn;

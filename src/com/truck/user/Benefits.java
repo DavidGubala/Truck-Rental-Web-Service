@@ -1,5 +1,7 @@
 package com.truck.user;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Benefits {
 	private int benefitId;
 	private boolean medical;

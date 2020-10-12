@@ -1,7 +1,8 @@
 package com.truck.user;
-
 import java.sql.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class License {
 	private String licenseType;
 	private String licenseNumber;

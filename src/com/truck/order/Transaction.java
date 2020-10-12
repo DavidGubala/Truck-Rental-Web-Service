@@ -1,7 +1,9 @@
 package com.truck.order;
 
 import java.time.LocalDateTime;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Transaction {
 	private int trasactionId;
 	private LocalDateTime transactionDate;

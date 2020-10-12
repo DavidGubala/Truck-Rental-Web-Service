@@ -1,5 +1,7 @@
 package com.truck.product;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Vehicle extends Product {
 	private String plateNumber;
 	private String make;

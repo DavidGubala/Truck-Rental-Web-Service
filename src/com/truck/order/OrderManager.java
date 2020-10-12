@@ -2,7 +2,6 @@ package com.truck.order;
 
 import com.truck.dal.OrderDAO;
 
-
 public class OrderManager {
 	
 	private OrderDAO orderDAO = new OrderDAO();

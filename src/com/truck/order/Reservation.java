@@ -2,7 +2,9 @@ package com.truck.order;
 
 import java.time.LocalDateTime;
 import java.time.Duration;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Reservation {
 	private int reservationId;
 	private LocalDateTime reservationDate;

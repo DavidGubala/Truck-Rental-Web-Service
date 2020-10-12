@@ -1,5 +1,7 @@
 package com.truck.user;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Address {
 
 		private int addressId;

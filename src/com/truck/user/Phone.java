@@ -1,5 +1,7 @@
 package com.truck.user;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Phone {
 	private String phoneNumber;
 	private String phoneType;

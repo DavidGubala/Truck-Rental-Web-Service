@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.truck.order.Order;
 import com.truck.product.Product;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Partner extends User {
 	private int partnerId;
 	private List<Product> inventory = new ArrayList<Product>();

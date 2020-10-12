@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.truck.order.Order;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Customer extends User{
 	private int customerId;
 	private License driverLicense;

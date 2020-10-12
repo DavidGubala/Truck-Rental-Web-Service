@@ -4,7 +4,9 @@ import com.truck.product.Vehicle;
 import com.truck.user.Customer;
 
 import java.sql.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Order {
 	private int orderId; 				// Each order located by and ID
 	private Date orderDate;	// Date Order was placed

@@ -1,6 +1,6 @@
 package com.truck.user;
 
-import com.truck.dal.*;
+import com.truck.dal.CustomerDAO;
 
 public class CustomerManager {
 	
@@ -28,5 +28,22 @@ public class CustomerManager {
 	    }
 		return null;
 	}
-	
+	//Update
+	public void editCustomer(Customer cust) {
+		try {
+			custDAO.editCustomer(cust);
+	    } catch (Exception se) {
+	      System.err.println("CustomerManager: Threw a Exception editing customer.");
+	      System.err.println(se.getMessage());
+	    }
+	}
+	//Delete
+	public void deleteCustomer(int customerId) {
+		try {
+			custDAO.deleteCustomer(customerId);
+	    } catch (Exception se) {
+	      System.err.println("CustomerManager: Threw a Exception deleting customer.");
+	      System.err.println(se.getMessage());
+	    }
+	}
 }

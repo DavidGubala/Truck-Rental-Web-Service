@@ -100,7 +100,7 @@ public class VehicleDAO {
 	    return null;
 	}
 	// Update
-	public void EditVehicle(Vehicle veh, int vehId) {
+	public void editVehicle(Vehicle veh, int vehId) {
 		deleteVehicle(veh.getProductId());
 		addVehicle(veh, vehId);
 	}	
