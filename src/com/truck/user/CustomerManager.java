@@ -1,5 +1,7 @@
 package com.truck.user;
 
+import java.util.Random;
+
 import com.truck.dal.CustomerDAO;
 
 public class CustomerManager {
@@ -7,7 +9,9 @@ public class CustomerManager {
 	private CustomerDAO custDAO = new CustomerDAO();
 	
 	//Create
-	public void addCustomer(Customer customer) {
+	public int addCustomer(Customer customer) {
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(100000);
 		
 		try {
 			custDAO.addCustomer(customer);
@@ -15,7 +19,10 @@ public class CustomerManager {
 	      System.err.println("CustomerManager: Threw a Exception adding customer.");
 	      System.err.println(se.getMessage());
 	    }
+		
+		return id;
 	}
+	
 	// Read
 	public Customer findCustomerById(int customerId) {
 		
@@ -28,6 +35,7 @@ public class CustomerManager {
 	    }
 		return null;
 	}
+	
 	//Update
 	public void editCustomer(Customer cust) {
 		try {
@@ -37,6 +45,7 @@ public class CustomerManager {
 	      System.err.println(se.getMessage());
 	    }
 	}
+	
 	//Delete
 	public void deleteCustomer(int customerId) {
 		try {

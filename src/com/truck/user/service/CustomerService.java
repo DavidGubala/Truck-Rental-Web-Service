@@ -8,9 +8,8 @@ import com.truck.user.service.representation.*;
 @WebService
 public interface CustomerService {
 	
-		public CustomerRepresentation getCustomer(String CustomerId);
+		public CustomerRepresentation getCustomer(int id);
 		public CustomerRepresentation createCustomer(CustomerRequest CustomerRequest);
-
-	    public Response updateCustomer(CustomerRequest CustomerRequest);
-	    public Response deleteCustomer(String CustomerId);
+	    public CustomerRepresentation updateCustomer(int id,CustomerRequest CustomerRequest);
+	    public Response deleteCustomer(int id);
 }

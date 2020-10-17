@@ -118,7 +118,7 @@ public class CustomerDAO {
 	  }
 	
 	// Update
-	public void editCustomer( Customer cust) {
+	public void editCustomer(Customer cust) {
         int customerId = cust.getCustomerId();
         deleteCustomer(customerId);
         addCustomer(cust);
