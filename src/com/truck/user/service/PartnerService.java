@@ -8,8 +8,8 @@ import com.truck.user.service.representation.*;
 @WebService
 public interface PartnerService {
 	
-		public CustomerRepresentation getCustomer(int id);
-		public CustomerRepresentation createCustomer(CustomerRequest CustomerRequest);
-	    public CustomerRepresentation updateCustomer(int id,CustomerRequest CustomerRequest);
-	    public Response deleteCustomer(int id);
+		public PartnerRepresentation getPartner(int id);
+		public PartnerRepresentation createPartner(PartnerRequest PartnerRequest);
+	    public PartnerRepresentation updatePartner(int id,PartnerRequest PartnerRequest);
+	    public Response deletePartner(int id);
 }

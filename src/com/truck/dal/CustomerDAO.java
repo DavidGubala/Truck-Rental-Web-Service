@@ -21,7 +21,7 @@ public class CustomerDAO {
         	//Insert the customer object
             //String custStm = "INSERT INTO Customer(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, driverLicenseType, licenseNumber, licenseExpirattionDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-        	String custStm = "INSERT INTO Customer(ID, firstName, lastName) VALUES(?, ?, ?);";
+        	String custStm = "INSERT INTO Customers(ID, firstName, lastName) VALUES(?, ?, ?);";
             custPst = con.prepareStatement(custStm);
             custPst.setInt(1, cust.getCustomerId());
             custPst.setString(2, cust.getFirstName());
@@ -71,7 +71,7 @@ public class CustomerDAO {
 		
 	    try {//Get Customer
 	    	st = con.createStatement();
-	    	String selectCustomerQuery = "SELECT * FROM Customer WHERE id = " + customerId + ";";
+	    	String selectCustomerQuery = "SELECT * FROM Customers WHERE id = " + customerId + ";";
 	    	ResultSet custRS = null;
 	    	
 	    	try {
@@ -143,10 +143,10 @@ public class CustomerDAO {
 		
         try {
         	st = con.createStatement();
-        	String custDELStm = "DELETE * FROM Customer WHERE ID = '" + customerId + "'";
+        	String custDELStm = "DELETE FROM Customers WHERE ID = " + customerId + ";";
         	st.executeQuery(custDELStm);
         } catch (SQLException ex) {
-
+        	
         } finally {
 
             try {
@@ -155,7 +155,7 @@ public class CustomerDAO {
                 }
 
             } catch (SQLException ex) {
-      	      	System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+      	      	System.err.println("CustomerDAO: Threw a SQLException deleting the customer object.");
       	      	System.err.println(ex.getMessage());
             }
         }

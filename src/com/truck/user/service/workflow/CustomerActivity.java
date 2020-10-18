@@ -18,7 +18,7 @@ public class CustomerActivity {
 	
 	public CustomerRepresentation getCustomer(int customerId) {
 		
-		Customer cust = cm.findCustomerById(customerId);
+		Customer cust = cm.getCustomer(customerId);
 		CustomerRepresentation custRep = new CustomerRepresentation();
 		custRep.setFirstName(cust.getFirstName());
 		custRep.setLastName(cust.getLastName());
@@ -29,8 +29,9 @@ public class CustomerActivity {
 	
 	public CustomerRepresentation editCustomer(int id, CustomerRequest custReq) {
 		Customer cust = new Customer();
+		cust.setCustomerId(id);
 		cust.setFirstName(custReq.getFirstName());
-		cust.setFirstName(custReq.getLastName());
+		cust.setLastName(custReq.getLastName());
 		cm.editCustomer(cust);
 		return getCustomer(id);
 	}

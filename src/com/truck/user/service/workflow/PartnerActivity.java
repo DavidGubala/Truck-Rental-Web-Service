@@ -1,44 +1,45 @@
 package com.truck.user.service.workflow;
 
-import com.truck.user.Customer;
-import com.truck.user.CustomerManager;
-import com.truck.user.service.representation.CustomerRequest;
-import com.truck.user.service.representation.CustomerRepresentation;
+import com.truck.user.Partner;
+import com.truck.user.PartnerManager;
+import com.truck.user.service.representation.PartnerRequest;
+import com.truck.user.service.representation.PartnerRepresentation;
 
 public class PartnerActivity {
-	private static CustomerManager cm = new CustomerManager();
+	private static PartnerManager pm = new PartnerManager();
 	
-	public CustomerRepresentation createCustomer(CustomerRequest custReq) {
-		Customer newCust = new Customer();
-		newCust.setFirstName(custReq.getFirstName());
-		newCust.setLastName(custReq.getLastName());
-		int id = cm.addCustomer(newCust);
-		return getCustomer(id);
+	public PartnerRepresentation createPartner(PartnerRequest partReq) {
+		Partner newCust = new Partner();
+		newCust.setFirstName(partReq.getFirstName());
+		newCust.setLastName(partReq.getLastName());
+		int id = pm.addPartner(newCust);
+		return getPartner(id);
 	}
 	
-	public CustomerRepresentation getCustomer(int customerId) {
+	public PartnerRepresentation getPartner(int partnerId) {
 		
-		Customer cust = cm.findCustomerById(customerId);
-		CustomerRepresentation custRep = new CustomerRepresentation();
-		custRep.setFirstName(cust.getFirstName());
-		custRep.setLastName(cust.getLastName());
-		custRep.setCustomerId(cust.getCustomerId());
+		Partner part = pm.getPartner(partnerId);
+		PartnerRepresentation partRep = new PartnerRepresentation();
+		partRep.setFirstName(part.getFirstName());
+		partRep.setLastName(part.getLastName());
+		partRep.setPartnerId(part.getPartnerId());
 		
-		return custRep;
+		return partRep;
 	}
 	
-	public CustomerRepresentation editCustomer(int id, CustomerRequest custReq) {
-		Customer cust = new Customer();
-		cust.setFirstName(custReq.getFirstName());
-		cust.setFirstName(custReq.getLastName());
-		cm.editCustomer(cust);
-		return getCustomer(id);
+	public PartnerRepresentation editPartner(int id, PartnerRequest partReq) {
+		Partner part = new Partner();
+		part.setPartnerId(id);
+		part.setFirstName(partReq.getFirstName());
+		part.setLastName(partReq.getLastName());
+		pm.editPartner(part);
+		return getPartner(id);
 	}
 	
-	public String deleteCustomer(int id) {
+	public String deletePartner(int id) {
 		
 		//dao.deleteEmployee(id);
-		cm.deleteCustomer(id);
+		pm.deletePartner(id);
 		
 		return "OK";
 	}

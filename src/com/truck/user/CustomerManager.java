@@ -25,7 +25,7 @@ public class CustomerManager {
 	}
 	
 	// Read
-	public Customer findCustomerById(int customerId) {
+	public Customer getCustomer(int customerId) {
 		
 		try {
 			Customer customer = custDAO.getCustomer(customerId);

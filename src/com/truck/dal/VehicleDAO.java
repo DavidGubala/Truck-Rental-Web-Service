@@ -16,7 +16,7 @@ public class VehicleDAO {
         try {
         	//Insert the Partner object
             //String prodStm = "INSERT INTO Vehicle(ID, PartnerID, vehicleType, price, plateNumber, make, model, year, availability, vin, odometer ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String prodStm = "INSERT INTO Vehicle(ID, PartnerID, price, make, model, year, availablility, odometer) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            String prodStm = "INSERT INTO Vehicles(ID, PartnerID, price, make, model, year, availablility, odometer) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             vehPst = con.prepareStatement(prodStm);
             vehPst.setInt(1, veh.getProductId());
             vehPst.setInt(2, partnerId);
@@ -59,7 +59,7 @@ public class VehicleDAO {
 	    try { 		
 	    	//Get Customer
 	    	st = con.createStatement();
-	    	String selectVehicleQuery = "SELECT * FROM Vehicle WHERE ID = '" + vehId + "'";
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = '" + vehId + "'";
 	    	
 	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
 	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);

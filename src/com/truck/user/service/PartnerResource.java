@@ -10,50 +10,51 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.truck.user.service.workflow.CustomerActivity;
-import com.truck.user.service.representation.CustomerRepresentation;
-import com.truck.user.service.representation.CustomerRequest;
+import com.truck.user.service.workflow.PartnerActivity;
+import com.truck.user.service.representation.PartnerRepresentation;
+import com.truck.user.service.representation.PartnerRequest;
 
-@Path("/CustomerService/")
-public class PartnerResource implements CustomerService {
+@Path("/PartnerService/")
+public class PartnerResource implements PartnerService {
 
 	@POST
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer")
-	public CustomerRepresentation createCustomer(CustomerRequest customerRequest) {
-		System.out.println("POST METHOD Request from Client with ............." + customerRequest.getFirstName() + "  " + customerRequest.getLastName());
-		CustomerActivity custActivity = new CustomerActivity();
-		return custActivity.createCustomer(customerRequest);
+	@Path("/partner")
+	public PartnerRepresentation createPartner(PartnerRequest partnerRequest) {
+		System.out.println("POST METHOD Request from Client with ............." + partnerRequest.getFirstName() + "  " + partnerRequest.getLastName());
+		PartnerActivity partActivity = new PartnerActivity();
+		return partActivity.createPartner(partnerRequest);
 	}
 	
 	@GET
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerId}")
-	public CustomerRepresentation getCustomer(@PathParam("customerId") int id) {
-		System.out.println("GET METHOD Request from Client with CustomerID int ............." + id);
-		CustomerActivity custActivity = new CustomerActivity();
-		return custActivity.getCustomer(id);
+	@Path("/partner/{partnerId}")
+	public PartnerRepresentation getPartner(@PathParam("partnerId") int id) {
+		System.out.println("GET METHOD Request from Client with PartnerID int ............." + id);
+		PartnerActivity partActivity = new PartnerActivity();
+		return partActivity.getPartner(id);
 	}
 
 	@PUT
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerId}")
-	public CustomerRepresentation updateCustomer(@PathParam("customerId") int id, CustomerRequest customerRequest) {
-		System.out.println("PUT METHOD Request from Client with ............." + id + "  " +customerRequest.getFirstName() + "  " + customerRequest.getLastName());
-		CustomerActivity custActivity = new CustomerActivity();
-		return custActivity.editCustomer(id, customerRequest);
+	@Path("/partner/{partnerId}")
+	public PartnerRepresentation updatePartner(@PathParam("partnerId") int id, PartnerRequest partnerRequest) {
+		System.out.println("PUT METHOD Request from Client with ............." + id + "  " +partnerRequest.getFirstName() + "  " + partnerRequest.getLastName());
+		PartnerActivity partActivity = new PartnerActivity();
+		return partActivity.editPartner(id, partnerRequest);
 	}
 
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
-	@Path("/customer/{customerId}")
-	public Response deleteCustomer(int id) {
-		System.out.println("DELETE METHOD Request from Client with CustomerID int ............." + id);
-		CustomerActivity custActivity = new CustomerActivity();
-		String res = custActivity.deleteCustomer(id);
+	@Path("/partner/{partnerId}")
+	public Response deletePartner(@PathParam("partnerId") int id) {
+		System.out.println("DELETE METHOD Request from Client with PartnerID int ............." + id);
+		PartnerActivity partActivity = new PartnerActivity();
+		String res = partActivity.deletePartner(id);
 		if (res.equals("OK")) {
 			return Response.status(Status.OK).build();
 		}
 		return null;
 	}
+
 }

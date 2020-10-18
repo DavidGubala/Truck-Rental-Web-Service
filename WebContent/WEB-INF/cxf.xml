@@ -9,14 +9,15 @@
  							http://cxf.apache.org/schemas/jaxws.xsd
  							http://cxf.apache.org/jaxrs
  							http://cxf.apache.org/schemas/jaxrs.xsd">
-  <import resource="classpath:META-INF/cxf/cxf.xml" />
-  <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+  	<import resource="classpath:META-INF/cxf/cxf.xml" />
+  	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
   	
-  <bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
-      	
-  <jaxrs:server name="CustomerService" address="http://localhost:8081">
+  	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
+  	
+  	<jaxrs:server name="CustomerService" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="customerServiceRest" />
+			<ref bean="partnerServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -25,9 +26,12 @@
 		<jaxrs:schemaLocations>
 			<jaxrs:schemaLocation>com.truck.user.service.representation.CustomerRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.truck.user.service.representation.CustomerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.user.service.representation.PartnerRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.user.service.representation.PartnerRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
-
 	</jaxrs:server>
+	
   	<bean id="customerServiceRest" class="com.truck.user.service.CustomerResource" />
-
+  	<bean id="partnerServiceRest" class="com.truck.user.service.PartnerResource" />
+  	
 </beans>

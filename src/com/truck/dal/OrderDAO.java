@@ -25,7 +25,7 @@ public class OrderDAO {
 
         try {
         	//Insert the order object
-            String ordStm = "INSERT INTO Order(ID, prducuctID, customerID, orderDate, orderStatus, reservationID, transactionID, ) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String ordStm = "INSERT INTO Orders(ID, prducuctID, customerID, orderDate, orderStatus, reservationID, transactionID, ) VALUES(?, ?, ?, ?, ?, ?, ?)";
             ordPst = con.prepareStatement(ordStm);
             ordPst.setInt(1, ord.getOrderId());
             ordPst.setInt(2, ord.getVehicle().getProductId());
@@ -69,7 +69,7 @@ public class OrderDAO {
 	    try { 		
 	    	//Get Order
 	    	st = con.createStatement();
-	    	String selectOrderQuery = "SELECT * FROM Order WHERE ID = '" + ordId + "'"; 
+	    	String selectOrderQuery = "SELECT * FROM Orders WHERE ID = '" + ordId + "'"; 
 
 	    	ResultSet ordRS = st.executeQuery(selectOrderQuery);      
 	    	System.out.println("OrderDAO: *************** Query " + selectOrderQuery);

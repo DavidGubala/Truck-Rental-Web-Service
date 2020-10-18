@@ -47,7 +47,7 @@ public class CustomerResource implements CustomerService {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/customer/{customerId}")
-	public Response deleteCustomer(int id) {
+	public Response deleteCustomer(@PathParam("customerId")int id) {
 		System.out.println("DELETE METHOD Request from Client with CustomerID int ............." + id);
 		CustomerActivity custActivity = new CustomerActivity();
 		String res = custActivity.deleteCustomer(id);

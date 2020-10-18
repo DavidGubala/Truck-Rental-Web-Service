@@ -20,7 +20,7 @@ public class PartnerDAO {
         try {
         	//Insert the Partner object
             //String partStm = "INSERT INTO Partner(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        	String partStm = "INSERT INTO Partner(ID, firstName, lastName) VALUES (?,?,?);";
+        	String partStm = "INSERT INTO Partners(ID, firstName, lastName) VALUES (?,?,?);";
         	partPst = con.prepareStatement(partStm);
             partPst.setInt(1, part.getPartnerId());
             partPst.setString(2, part.getFirstName());
@@ -69,7 +69,7 @@ public class PartnerDAO {
 	    try { 		
 			//Get Partner
 			st = con.createStatement();
-			String selectPartnerQuery = "SELECT * FROM Partner WHERE ID = " + partnerId + ";";
+			String selectPartnerQuery = "SELECT * FROM Partners WHERE ID = " + partnerId + ";";
 			
 			ResultSet PartRS = st.executeQuery(selectPartnerQuery);      
 			System.out.println("PartnerDAO: *************** Query " + selectPartnerQuery);
@@ -127,7 +127,7 @@ public class PartnerDAO {
         try {
         	st = con.createStatement();
         	
-            String partDELStm = "DELETE * FROM Partner WHERE ID = '" + partnerId + "'";
+            String partDELStm = "DELETE FROM Partners WHERE ID = " + partnerId + ";";
             st.executeQuery(partDELStm);
         } catch (SQLException ex) {
 
