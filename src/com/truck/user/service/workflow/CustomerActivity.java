@@ -11,7 +11,7 @@ public class CustomerActivity {
 	public CustomerRepresentation createCustomer(CustomerRequest custReq) {
 		Customer newCust = new Customer();
 		newCust.setFirstName(custReq.getFirstName());
-		newCust.setFirstName(custReq.getLastName());
+		newCust.setLastName(custReq.getLastName());
 		int id = cm.addCustomer(newCust);
 		return getCustomer(id);
 	}

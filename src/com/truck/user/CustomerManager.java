@@ -14,6 +14,7 @@ public class CustomerManager {
 		int id = randomGenerator.nextInt(100000);
 		
 		try {
+			customer.setCustomerId(id);
 			custDAO.addCustomer(customer);
 	    } catch (Exception se) {
 	      System.err.println("CustomerManager: Threw a Exception adding customer.");
