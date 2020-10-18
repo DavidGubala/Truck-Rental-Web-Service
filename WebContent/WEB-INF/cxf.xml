@@ -14,10 +14,11 @@
   	
   	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
   	
-  	<jaxrs:server name="CustomerService" address="http://localhost:8081">
+  	<jaxrs:server name="TruckingService" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="customerServiceRest" />
 			<ref bean="partnerServiceRest" />
+			<ref bean="vehicleServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -28,10 +29,13 @@
 			<jaxrs:schemaLocation>com.truck.user.service.representation.CustomerRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.truck.user.service.representation.PartnerRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.truck.user.service.representation.PartnerRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.product.service.representation.VehicleRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.product.service.representation.VehicleRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 	</jaxrs:server>
 	
   	<bean id="customerServiceRest" class="com.truck.user.service.CustomerResource" />
   	<bean id="partnerServiceRest" class="com.truck.user.service.PartnerResource" />
+  	<bean id="vehicleServiceRest" class="com.truck.product.service.VehicleResource" />
   	
 </beans>

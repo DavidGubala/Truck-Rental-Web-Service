@@ -24,7 +24,7 @@ public class VehicleDAO {
             vehPst.setString(4, veh.getMake());
             vehPst.setString(5, veh.getModel());
             vehPst.setInt(6, veh.getYear());
-            vehPst.setBoolean(7, veh.getAvailability()); 
+            vehPst.setString(7, veh.getAvailability()); 
             vehPst.setInt(8, veh.getOdometer());
             
             if(vehPst.toString().contains("?")){
@@ -59,7 +59,7 @@ public class VehicleDAO {
 	    try { 		
 	    	//Get Customer
 	    	st = con.createStatement();
-	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = '" + vehId + "'";
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = " + vehId + ";";
 	    	
 	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
 	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
@@ -70,12 +70,12 @@ public class VehicleDAO {
 	      while ( vehRS.next() ) {														
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
-	    	  vehicle.setPricePerMile(vehRS.getDouble("price"));
+	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
 	    	  vehicle.setYear(vehRS.getInt("year"));								
-	    	  vehicle.setAvailability(vehRS.getBoolean("availablility"));
+	    	  vehicle.setAvailability(vehRS.getString("availability"));
 	    	  //vehicle.setVin(vehRS.getString("vin"));
 	    	  vehicle.setOdometer(vehRS.getInt("odometer"));
 	      }
@@ -115,7 +115,7 @@ public class VehicleDAO {
         try {
         	st = con.createStatement();
         	
-            String vehDELStm = "DELETE * FROM Vehicle WHERE ID = '" + vehId + "'";
+            String vehDELStm = "DELETE FROM Vehicle WHERE ID = " + vehId + ";";
             st.executeQuery(vehDELStm);
             
         } catch (SQLException ex) {
