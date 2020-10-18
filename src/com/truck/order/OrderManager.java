@@ -28,4 +28,24 @@ public class OrderManager {
 	    }
 		return null;
 	}
+	
+	// Update
+	public void editOrder(Order order) {
+		try {
+			orderDAO.editOrder(order);
+		} catch(Exception se) {
+			System.err.println("OrderManager: Threw a Exception editing order.");
+			System.err.println(se.getMessage());
+		}
+	}
+	
+	//Delete
+	public void deleteOrder(int orderId) {
+		try {
+			orderDAO.deleteOrder(orderId);
+		} catch (Exception se) {
+			System.err.println("OrderManager: Threw a Exception deleting order.");
+			System.err.println(se.getMessage());
+		}
+	}
 }

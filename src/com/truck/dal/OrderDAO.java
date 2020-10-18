@@ -19,7 +19,7 @@ public class OrderDAO {
 	//REservationDAO resDAO = new ReservationDAO();
 	
 	// Create
-	public void creteOrder(Order ord) {
+	public void createOrder(Order ord) {
 		Connection con = DBHelper.getConnection();
         PreparedStatement ordPst = null;
 
@@ -120,5 +120,36 @@ public class OrderDAO {
             }
 	    }
 	    return null;
+	}
+	
+	//Update
+	public void editOrder(Order order) {
+		int orderId = order.getOrderId();
+		deleteOrder(orderId);
+		createOrder(order);
+	}
+	
+	//Delete
+	public void deleteOrder(int orderId) {
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+		try {
+			st = con.createStatement();
+			String orderDELStm = "DELETE FROM Orders WHERE ID=" + orderId + ";";
+			st.executeQuery(orderDELStm);
+		} catch (SQLException ex) {
+			
+		} finally {
+			
+			try {
+				if(st != null) {
+					st.close();
+				}
+			} catch (SQLException ex) {
+				System.err.println("OrderDAO: Threw a SQLException deleting the order object.");
+				System.err.println(ex.getMessage());
+			}
+		}
 	}
 }
