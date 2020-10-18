@@ -25,16 +25,21 @@ public class OrderDAO {
 
         try {
         	//Insert the order object
-            String ordStm = "INSERT INTO Order(ID, prducuctID, customerID, reservationID, transactionID, orderDate, orderStatus ) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String ordStm = "INSERT INTO Order(ID, prducuctID, customerID, orderDate, orderStatus, reservationID, transactionID, ) VALUES(?, ?, ?, ?, ?, ?, ?)";
             ordPst = con.prepareStatement(ordStm);
             ordPst.setInt(1, ord.getOrderId());
             ordPst.setInt(2, ord.getVehicle().getProductId());
             ordPst.setInt(3, ord.getCustomer().getCustomerId());
-            ordPst.setInt(4, ord.getReservation().getReservationId());
-            ordPst.setInt(5, ord.getTransaction().getTrasactionId());
-            ordPst.setDate(6, ord.getDate());
-            ordPst.setString(7, ord.getOrderStatus());
-            ordPst.executeUpdate();
+            ordPst.setDate(4, ord.getDate());
+            ordPst.setString(5, ord.getOrderStatus());
+            ordPst.setInt(6, ord.getReservation().getReservationId());
+            ordPst.setInt(7, ord.getTransaction().getTrasactionId());
+            
+            if(ordPst.toString().contains("?")){
+                System.err.println("Statement still contains a ? and can't be executed");
+            } else{
+            	ordPst.executeUpdate();
+            }
             
             //Need to add Reservation and Transaction DAO.create here
             

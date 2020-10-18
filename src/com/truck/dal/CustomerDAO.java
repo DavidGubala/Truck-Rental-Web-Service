@@ -66,7 +66,6 @@ public class CustomerDAO {
 	
 	// Read
 	public Customer getCustomer(int customerId) {
-
 		Connection con = DBHelper.getConnection();
 		Statement st = null;
 		

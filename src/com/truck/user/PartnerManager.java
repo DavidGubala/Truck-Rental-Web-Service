@@ -1,23 +1,28 @@
 package com.truck.user;
 
+import java.util.Random;
+
 import com.truck.dal.*;
 
 public class PartnerManager {
 	
 	private PartnerDAO partDAO = new PartnerDAO();
 	
-	// Using CRUD
-	
-	//Create
-	public void addPartner(Partner partner) {
+	public int addPartner(Partner partner) {
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(100000);
+		
 		try {
+			partner.setPartnerId(id);
 			partDAO.addPartner(partner);
 	    } catch (Exception se) {
 	      System.err.println("PartnerManager: Threw a Exception creating partner.");
 	      System.err.println(se.getMessage());
 	    }
+
+		return id;
 	}
-	//Read
+	
 	public Partner getPartner(int partnerId) {
 		try {
 			Partner partner = partDAO.getPartner(partnerId);
@@ -28,7 +33,7 @@ public class PartnerManager {
 	    }
 		return null;
 	}
-	//update
+	
 	public void editPartner(Partner partner) {
 		try {
 			partDAO.editPartner(partner);
@@ -37,7 +42,7 @@ public class PartnerManager {
 	      System.err.println(se.getMessage());
 	    }
 	}
-	//Delete
+	
 	public void deletePartner(int partnerId) {
 		try {
 			partDAO.deletePartner(partnerId);

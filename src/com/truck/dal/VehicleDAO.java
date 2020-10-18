@@ -15,20 +15,23 @@ public class VehicleDAO {
 
         try {
         	//Insert the Partner object
-            String prodStm = "INSERT INTO Vehicle(ID, PartnerID, vehicleType, price, plateNumber, make, model, year, availablility, vin, odometer ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            //String prodStm = "INSERT INTO Vehicle(ID, PartnerID, vehicleType, price, plateNumber, make, model, year, availability, vin, odometer ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String prodStm = "INSERT INTO Vehicle(ID, PartnerID, price, make, model, year, availablility, odometer) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             vehPst = con.prepareStatement(prodStm);
             vehPst.setInt(1, veh.getProductId());
             vehPst.setInt(2, partnerId);
-            vehPst.setString(3, veh.getType());
-            vehPst.setDouble(4, veh.getPricePerMile());
-            vehPst.setString(5, veh.getPlateNumber());
-            vehPst.setString(6, veh.getMake());
-            vehPst.setString(7, veh.getModel());
-            vehPst.setInt(8, veh.getYear());
-            vehPst.setBoolean(9, veh.getAvailability()); 
-            vehPst.setString(10, veh.getVin());
-            vehPst.setInt(11, veh.getOdometer());
-            vehPst.executeUpdate();
+            vehPst.setDouble(3, veh.getPricePerMile());
+            vehPst.setString(4, veh.getMake());
+            vehPst.setString(5, veh.getModel());
+            vehPst.setInt(6, veh.getYear());
+            vehPst.setBoolean(7, veh.getAvailability()); 
+            vehPst.setInt(8, veh.getOdometer());
+            
+            if(vehPst.toString().contains("?")){
+                System.err.println("Statement still contains a ? and can't be executed");
+            } else{
+            	vehPst.executeUpdate();
+            }
             
         } catch (SQLException ex) {
 
@@ -66,14 +69,14 @@ public class VehicleDAO {
     	  
 	      while ( vehRS.next() ) {														
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
-	    	  vehicle.setType(vehRS.getString("vehicleType"));
+	    	  //vehicle.setType(vehRS.getString("vehicleType"));
 	    	  vehicle.setPricePerMile(vehRS.getDouble("price"));
-	    	  vehicle.setPlateNumber(vehRS.getString("plateNumber"));
+	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
 	    	  vehicle.setYear(vehRS.getInt("year"));								
 	    	  vehicle.setAvailability(vehRS.getBoolean("availablility"));
-	    	  vehicle.setVin(vehRS.getString("vin"));
+	    	  //vehicle.setVin(vehRS.getString("vin"));
 	    	  vehicle.setOdometer(vehRS.getInt("odometer"));
 	      }
 	      
