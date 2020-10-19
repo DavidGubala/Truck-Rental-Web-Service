@@ -10,7 +10,7 @@ public class Vehicle extends Product {
 	private int odometer;
 	private String vin;
 	private String type;
-	private boolean available;
+	private String available;
 	
 
 	public String getPlateNumber() {
@@ -69,11 +69,11 @@ public class Vehicle extends Product {
 		this.type = type;
 	}
 	
-	public boolean getAvailability() {
+	public String getAvailability() {
 		return available;
 	}
 	
-	public void setAvailability(boolean available) {
+	public void setAvailability(String available) {
 		this.available = available;
 	}
 }

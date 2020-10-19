@@ -37,10 +37,7 @@ public class CustomerActivity {
 	}
 	
 	public String deleteCustomer(int id) {
-		
-		//dao.deleteEmployee(id);
 		cm.deleteCustomer(id);
-		
 		return "OK";
 	}
 	

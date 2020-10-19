@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.truck.product.Vehicle;
 
@@ -24,7 +26,7 @@ public class VehicleDAO {
             vehPst.setString(4, veh.getMake());
             vehPst.setString(5, veh.getModel());
             vehPst.setInt(6, veh.getYear());
-            vehPst.setBoolean(7, veh.getAvailability()); 
+            vehPst.setString(7, veh.getAvailability()); 
             vehPst.setInt(8, veh.getOdometer());
             
             if(vehPst.toString().contains("?")){
@@ -59,7 +61,7 @@ public class VehicleDAO {
 	    try { 		
 	    	//Get Customer
 	    	st = con.createStatement();
-	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = '" + vehId + "'";
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = " + vehId + ";";
 	    	
 	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
 	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
@@ -70,12 +72,12 @@ public class VehicleDAO {
 	      while ( vehRS.next() ) {														
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
-	    	  vehicle.setPricePerMile(vehRS.getDouble("price"));
+	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
 	    	  vehicle.setYear(vehRS.getInt("year"));								
-	    	  vehicle.setAvailability(vehRS.getBoolean("availablility"));
+	    	  vehicle.setAvailability(vehRS.getString("availability"));
 	    	  //vehicle.setVin(vehRS.getString("vin"));
 	    	  vehicle.setOdometer(vehRS.getInt("odometer"));
 	      }
@@ -115,7 +117,7 @@ public class VehicleDAO {
         try {
         	st = con.createStatement();
         	
-            String vehDELStm = "DELETE * FROM Vehicle WHERE ID = '" + vehId + "'";
+            String vehDELStm = "DELETE FROM Vehicle WHERE ID = " + vehId + ";";
             st.executeQuery(vehDELStm);
             
         } catch (SQLException ex) {
@@ -132,5 +134,113 @@ public class VehicleDAO {
     	      System.err.println(ex.getMessage());
             }
         }
+	}
+
+	public List<Vehicle> getPartnerInventory(int partnerId){
+		List<Vehicle> inventory = new ArrayList<Vehicle>();
+		
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try { 		
+	    	//Get Customer
+	    	st = con.createStatement();
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE PartnerID = " + partnerId + ";";
+	    	
+	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
+	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
+	    	
+	      //Get Vehicle
+    	  Vehicle vehicle = new Vehicle();
+    	  
+	      while (vehRS.next() ) {														
+	    	  vehicle.setProductId(vehRS.getInt("ID"));
+	    	  //vehicle.setType(vehRS.getString("vehicleType"));
+	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
+	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
+	    	  vehicle.setMake(vehRS.getString("make"));
+	    	  vehicle.setModel(vehRS.getString("model"));
+	    	  vehicle.setYear(vehRS.getInt("year"));								
+	    	  vehicle.setAvailability(vehRS.getString("availability"));
+	    	  //vehicle.setVin(vehRS.getString("vin"));
+	    	  vehicle.setOdometer(vehRS.getInt("odometer"));
+	    	  inventory.add(vehicle);
+	      }
+	      
+	      vehRS.close();
+	      st.close();
+	      return inventory;
+	    }	    
+	    catch (SQLException se) {
+	      System.err.println("VehicleDAO: Threw a SQLException retrieving the vehicle object.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
+    	      System.err.println(ex.getMessage());
+            }
+	    }
+	    return null;
+	}
+	
+	public List<Vehicle> getSiteInventory(){
+		List<Vehicle> inventory = new ArrayList<Vehicle>();
+		
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try { 		
+	    	//Get Customer
+	    	st = con.createStatement();
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles;";
+	    	
+	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
+	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
+	    	
+	      //Get Vehicle
+    	  Vehicle vehicle = new Vehicle();
+    	  
+	      while (vehRS.next() ) {														
+	    	  vehicle.setProductId(vehRS.getInt("ID"));
+	    	  //vehicle.setType(vehRS.getString("vehicleType"));
+	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
+	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
+	    	  vehicle.setMake(vehRS.getString("make"));
+	    	  vehicle.setModel(vehRS.getString("model"));
+	    	  vehicle.setYear(vehRS.getInt("year"));								
+	    	  vehicle.setAvailability(vehRS.getString("availability"));
+	    	  //vehicle.setVin(vehRS.getString("vin"));
+	    	  vehicle.setOdometer(vehRS.getInt("odometer"));
+	    	  inventory.add(vehicle);
+	      }
+	      
+	      vehRS.close();
+	      st.close();
+	      return inventory;
+	    }	    
+	    catch (SQLException se) {
+	      System.err.println("VehicleDAO: Threw a SQLException retrieving the vehicle object.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
+    	      System.err.println(ex.getMessage());
+            }
+	    }
+		return null;
 	}
 }
