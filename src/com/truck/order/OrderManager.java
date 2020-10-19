@@ -1,5 +1,7 @@
 package com.truck.order;
 
+import java.util.Random;
+
 import com.truck.dal.OrderDAO;
 
 public class OrderManager {
@@ -7,13 +9,19 @@ public class OrderManager {
 	private OrderDAO orderDAO = new OrderDAO();
 
 	// Create
-	public void createOrder(Order order) {
+	public int createOrder(Order order) {
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(10000);
+		
 		try {
-			orderDAO.creteOrder(order);
+			order.setOrderId(id);
+			orderDAO.createOrder(order);
 	    } catch (Exception se) {
 	      System.err.println("OrderManager: Threw a Exception creating order.");
 	      System.err.println(se.getMessage());
 	    }
+		
+		return id;
 	}
 
 	// Read

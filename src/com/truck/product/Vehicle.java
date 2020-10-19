@@ -3,7 +3,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Vehicle extends Product {
-	private int vehicleId;
 	private String plateNumber;
 	private String make;
 	private String model;
@@ -13,13 +12,6 @@ public class Vehicle extends Product {
 	private String type;
 	private boolean available;
 	
-	
-	public int getVehicleId() {
-		return vehicleId;
-	}
-	public void setVehicleId(int vehicleId) {
-		this.vehicleId = vehicleId;
-	}
 
 	public String getPlateNumber() {
 		return plateNumber;

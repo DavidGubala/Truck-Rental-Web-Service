@@ -5,7 +5,7 @@ import com.truck.dal.VehicleDAO;
 public class VehicleManager {
 private VehicleDAO vehDAO = new VehicleDAO();
 	//Read
-	public Vehicle findVehicleById(int vehicleId) {
+	public Vehicle findPVehicleById(int vehicleId) {
 		
 		try {
 			Vehicle vehicle = vehDAO.getVehicle(vehicleId);
