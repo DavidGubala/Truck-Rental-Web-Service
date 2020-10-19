@@ -1,5 +1,7 @@
 package com.truck.product.service;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,5 +19,14 @@ public class VehicleResource implements VehicleService {
 		System.out.println("GET METHOD Request from Client with VehicleID int ............." + id);
 		VehicleActivity vehActivity = new VehicleActivity();
 		return vehActivity.getVehicle(id);
+	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/vehicle")
+	public List<VehicleRepresentation> getSiteInventory() {
+		System.out.println("GET METHOD Request from Client for Entire Inventory");
+		VehicleActivity vehActivity = new VehicleActivity();
+		return vehActivity.getInventory();
 	}
 }

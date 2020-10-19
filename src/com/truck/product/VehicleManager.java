@@ -1,5 +1,8 @@
 package com.truck.product;
 
+import java.util.List;
+import java.util.Random;
+
 import com.truck.dal.VehicleDAO;
 
 public class VehicleManager {
@@ -8,8 +11,7 @@ private VehicleDAO vehDAO = new VehicleDAO();
 	public Vehicle getVehicle(int vehicleId) {
 		
 		try {
-			Vehicle vehicle = vehDAO.getVehicle(vehicleId);
-			return vehicle;
+			return vehDAO.getVehicle(vehicleId);
 		} catch (Exception se) {
 			System.err.println("VehicleManager: Threw a Exception retrieving vehicle.");
 			System.err.println(se.getMessage());
@@ -17,17 +19,22 @@ private VehicleDAO vehDAO = new VehicleDAO();
 		return null;
 	}
 	//Create
-	public void addVehicle(Vehicle vehicle, int partnerId) {
+	public int addVehicle(Vehicle vehicle, int partnerId) {
+		Random randomGenerator = new Random();
+		int id = randomGenerator.nextInt(100000);
 		
 		try {
+			vehicle.setProductId(id);
 			vehDAO.addVehicle(vehicle, partnerId);
 		} catch (Exception se) {
 			System.err.println("VehicleManager: Threw a Exception retrieving vehicle.");
 			System.err.println(se.getMessage());
 		}
+		return id;
 	}
 	//Update
 	public void editVehicle(Vehicle vehicle,int partnerId) {
+		//Partner Validation
 		try {
 			vehDAO.editVehicle(vehicle, partnerId);
 		} catch (Exception se) {
@@ -36,12 +43,34 @@ private VehicleDAO vehDAO = new VehicleDAO();
 		}
 	}
 	//Delete
-	public void deleteVehicle(int vehId) {
+	public void deleteVehicle(int vehId, int partnerId) {
+		//Partner Validation
 		try {
 			vehDAO.deleteVehicle(vehId);
 		} catch (Exception se) {
 			System.err.println("VehicleManager: Threw a Exception deleting vehicle.");
 			System.err.println(se.getMessage());
 		}
+	}
+	
+	public List<Vehicle> getPartnerInventory(int id) {
+		//Partner Validation
+		try {
+			return vehDAO.getPartnerInventory(id);
+		} catch (Exception se) {
+			System.err.println("VehicleManager: Threw a Exception getting partner vehicle inventory.");
+			System.err.println(se.getMessage());
+		}
+		return null;
+	}
+	
+	public List<Vehicle> getSiteInventory() {
+		try {
+			return vehDAO.getSiteInventory();
+		} catch (Exception se) {
+			System.err.println("VehicleManager: Threw a Exception getting entire vehicle inventory.");
+			System.err.println(se.getMessage());
+		}
+		return null;
 	}
 }
