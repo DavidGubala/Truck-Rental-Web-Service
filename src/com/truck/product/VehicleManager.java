@@ -35,32 +35,35 @@ private VehicleDAO vehDAO = new VehicleDAO();
 	//Update
 	public void editVehicle(Vehicle vehicle,int partnerId) {
 		//Partner Validation
-		try {
-			vehDAO.editVehicle(vehicle, partnerId);
-		} catch (Exception se) {
-			System.err.println("VehicleManager: Threw a Exception editing vehicle.");
-			System.err.println(se.getMessage());
+		if(vehDAO.validation(vehicle.getProductId(), partnerId)) {
+			try {
+				vehDAO.editVehicle(vehicle, partnerId);
+			} catch (Exception se) {
+				System.err.println("VehicleManager: Threw a Exception editing vehicle.");
+				System.err.println(se.getMessage());
+			}
 		}
 	}
 	//Delete
 	public void deleteVehicle(int vehId, int partnerId) {
 		//Partner Validation
-		try {
-			vehDAO.deleteVehicle(vehId);
-		} catch (Exception se) {
-			System.err.println("VehicleManager: Threw a Exception deleting vehicle.");
-			System.err.println(se.getMessage());
+		if(vehDAO.validation(vehId, partnerId)) {
+			try {
+				vehDAO.deleteVehicle(vehId);
+			} catch (Exception se) {
+				System.err.println("VehicleManager: Threw a Exception deleting vehicle.");
+				System.err.println(se.getMessage());
+			}
 		}
 	}
 	
 	public List<Vehicle> getPartnerInventory(int id) {
-		//Partner Validation
-		try {
-			return vehDAO.getPartnerInventory(id);
-		} catch (Exception se) {
-			System.err.println("VehicleManager: Threw a Exception getting partner vehicle inventory.");
-			System.err.println(se.getMessage());
-		}
+			try {
+				return vehDAO.getPartnerInventory(id);
+			} catch (Exception se) {
+				System.err.println("VehicleManager: Threw a Exception getting partner vehicle inventory.");
+				System.err.println(se.getMessage());
+			}
 		return null;
 	}
 	
