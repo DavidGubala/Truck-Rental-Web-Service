@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.user.Benefits;
-import com.truck.user.Employee;
-import com.truck.user.Phone;
+import com.truck.domain.model.user.Benefits;
+import com.truck.domain.model.user.Employee;
+import com.truck.domain.model.user.Phone;
 
 public class EmployeeDAO {
     AddressDAO addDAO = new AddressDAO();

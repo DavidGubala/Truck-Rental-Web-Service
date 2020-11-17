@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.order.Order;
-import com.truck.order.Reservation;
-import com.truck.order.Transaction;
-import com.truck.product.Vehicle;
-import com.truck.user.Customer;
+import com.truck.domain.model.order.Order;
+import com.truck.domain.model.order.Reservation;
+import com.truck.domain.model.order.Transaction;
+import com.truck.domain.model.product.Vehicle;
+import com.truck.domain.model.user.Customer;
 
 public class OrderDAO {
 	CustomerDAO custDAO = new CustomerDAO();

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.truck.product.Vehicle;
+import com.truck.domain.model.product.Vehicle;
 
 public class VehicleDAO {
 	public void addVehicle(Vehicle veh, int partnerId) {

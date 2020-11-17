@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.truck.user.Partner;
-import com.truck.user.Phone;
+import com.truck.domain.model.user.Partner;
+import com.truck.domain.model.user.Phone;
 
 public class PartnerDAO {
     AddressDAO addDAO = new AddressDAO();
