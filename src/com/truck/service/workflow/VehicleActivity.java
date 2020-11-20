@@ -6,6 +6,7 @@ import java.util.List;
 import com.truck.domain.manager.VehicleManager;
 import com.truck.domain.model.product.Vehicle;
 import com.truck.domain.model.user.Partner;
+import com.truck.domain.model.Link;
 import com.truck.service.representation.VehicleRepresentation;
 import com.truck.service.representation.VehicleRequest;
 
@@ -21,7 +22,12 @@ public class VehicleActivity {
 		vehRep.setModel(veh.getModel());
 		vehRep.setYear(veh.getYear());
 		vehRep.setAvailability(veh.getAvailability());
-		vehRep.setOdometer(veh.getOdometer());		
+		vehRep.setOdometer(veh.getOdometer());
+		
+		Link rentVehicle = new Link("rent", 
+				"http://localhost:8081/OrderService/order?customer+vehicle" + vehRep.getVehicleId());	
+		vehRep.setLinks(rentVehicle);
+		
 		return vehRep;
 	}
 	
@@ -40,6 +46,11 @@ public class VehicleActivity {
 			vehRep.setYear(veh.getYear());
 			vehRep.setAvailability(veh.getAvailability());
 			vehRep.setOdometer(veh.getOdometer());
+			
+			Link viewVehicle = new Link("view", 
+					"http://localhost:8081/VehicleService/vehicle/?vehicleId=" + vehRep.getVehicleId());	
+			vehRep.setLinks(viewVehicle);
+			
 			invRep.add(vehRep);
 		}
 		return invRep;

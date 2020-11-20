@@ -1,6 +1,9 @@
 package com.truck.service.workflow;
 
+import java.util.List;
+
 import com.truck.domain.manager.CustomerManager;
+import com.truck.domain.model.Link;
 import com.truck.domain.model.user.Customer;
 import com.truck.service.representation.CustomerRepresentation;
 import com.truck.service.representation.CustomerRequest;
@@ -23,7 +26,6 @@ public class CustomerActivity {
 		custRep.setFirstName(cust.getFirstName());
 		custRep.setLastName(cust.getLastName());
 		custRep.setCustomerId(cust.getCustomerId());
-		
 		return custRep;
 	}
 	

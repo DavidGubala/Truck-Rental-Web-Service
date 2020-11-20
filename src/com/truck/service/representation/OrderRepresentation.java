@@ -11,7 +11,7 @@ import com.truck.domain.model.user.Customer;
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class OrderRepresentation {
+public class OrderRepresentation extends AbstractRepresentation{
 	private int orderId;
 	private Vehicle vehicle;
 	private Customer customer;

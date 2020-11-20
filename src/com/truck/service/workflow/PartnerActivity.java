@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.truck.domain.manager.PartnerManager;
 import com.truck.domain.manager.VehicleManager;
+import com.truck.domain.model.Link;
 import com.truck.domain.model.product.Vehicle;
 import com.truck.domain.model.user.Partner;
 import com.truck.service.representation.PartnerRepresentation;
@@ -30,6 +31,18 @@ public class PartnerActivity {
 		partRep.setFirstName(part.getFirstName());
 		partRep.setLastName(part.getLastName());
 		partRep.setPartnerId(part.getPartnerId());
+
+		//Partner Links
+		Link edit = new Link("edit", 
+				"http://localhost:8081/PartnerService/partner/?partnerId" + partRep.getPartnerid());
+		Link delete = new Link("delete", 
+				"http://localhost:8081/PartnerService/partner/?partnerId" + partRep.getPartnerid());	
+		Link viewOrders = new Link("view orders", 
+				"http://localhost:8081/OrderService/order?customer+vehicle" + vehRep.getVehicleId());	
+		Link viewInventory = new Link("view inventory", 
+				"http://localhost:8081/OrderService/order?customer+vehicle" + vehRep.getVehicleId());	
+		partRep.setLinks(edit,edit);
+		
 		
 		return partRep;
 	}
