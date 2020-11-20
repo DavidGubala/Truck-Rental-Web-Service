@@ -7,6 +7,7 @@ import com.truck.domain.model.Link;
 import com.truck.domain.model.user.Customer;
 import com.truck.service.representation.CustomerRepresentation;
 import com.truck.service.representation.CustomerRequest;
+import com.truck.service.representation.PartnerRepresentation;
 
 public class CustomerActivity {
 	private static CustomerManager cm = new CustomerManager();
@@ -41,6 +42,15 @@ public class CustomerActivity {
 	public String deleteCustomer(int id) {
 		cm.deleteCustomer(id);
 		return "OK";
+	}
+	
+	public void customerLinks(CustomerRepresentation custRep) {
+		Link self = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/?customerId=" + custRep.getCustomerid(), "xml");
+		Link edit = new Link("updateCustomer", "http://localhost:8081/PartnerService/partner/?partnerId=" + custRep.getCustomerid(), "xml");
+		Link delete = new Link("deleteCustomer", "http://localhost:8081/PartnerService/partner/?partnerId=" + custRep.getCustomerid(), "xml");	
+		Link viewOrders = new Link("getCustomerOrders",  "http://localhost:8081/PartnerService/partner/?partnerId=" + custRep.getCustomerid() + "/orders", "xml");
+		Link viewInventory = new Link("getSiteInventory", "http://localhost:8081/VehicleService/vehicle?customerId=" + custRep.getCustomerid(), "xml");
+		custRep.setLinks(self, edit, delete, viewOrders, viewInventory);
 	}
 	
 }

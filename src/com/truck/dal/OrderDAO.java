@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.truck.domain.model.order.Order;
 import com.truck.domain.model.order.Reservation;
@@ -25,15 +27,15 @@ public class OrderDAO {
 
         try {
         	//Insert the order object
-            String ordStm = "INSERT INTO Orders(ID, prducuctID, customerID, orderDate, orderStatus, reservationID, transactionID, ) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String ordStm = "INSERT INTO Orders(ID, productID, customerID, orderDate, orderStatus) VALUES(?, ?, ?, ?, ?)";
             ordPst = con.prepareStatement(ordStm);
             ordPst.setInt(1, ord.getOrderId());
             ordPst.setInt(2, ord.getVehicle().getProductId());
             ordPst.setInt(3, ord.getCustomer().getCustomerId());
             ordPst.setDate(4, ord.getDate());
             ordPst.setString(5, ord.getOrderStatus());
-            ordPst.setInt(6, ord.getReservation().getReservationId());
-            ordPst.setInt(7, ord.getTransaction().getTrasactionId());
+            //ordPst.setInt(6, ord.getReservation().getReservationId());
+            //ordPst.setInt(7, ord.getTransaction().getTrasactionId());
             
             if(ordPst.toString().contains("?")){
                 System.err.println("Statement still contains a ? and can't be executed");
@@ -151,5 +153,107 @@ public class OrderDAO {
 				System.err.println(ex.getMessage());
 			}
 		}
+	}
+	
+	public List<Order> getPartnerOrders(int partnerId){
+		List<Order> orders = new ArrayList<Order>();
+		
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try {
+	    	st = con.createStatement();
+	    	String selectOrderQuery = "SELECT * FROM Orders WHERE PartnerID = " + partnerId + ";";
+	    	
+	    	ResultSet ordRS = st.executeQuery(selectOrderQuery);      
+	    	System.out.println("OrderDAO: *************** Query " + selectOrderQuery);
+	    	
+    	  Order order = new Order();
+    	  Customer customer = new Customer();
+    	  Vehicle vehicle = new Vehicle();
+	      while (ordRS.next() ) {
+	    	  order.setOrderId(ordRS.getInt("orderID"));
+	    	  order.setDate(ordRS.getDate("orderDate"));
+	    	  order.setOrderStatus(ordRS.getNString("orderStatus"));
+	    	  customer = custDAO.getCustomer(ordRS.getInt("customerID"));
+	    	  vehicle = vehDAO.getVehicle(ordRS.getInt("prducuctID"));
+	    	  order.setCostumer(customer);
+	    	  order.setVehicle(vehicle);
+	    	  orders.add(order);
+	      }
+	      
+	      ordRS.close();
+	      st.close();
+	      
+	      return orders;
+	    }	    
+	    catch (SQLException se) {
+	      System.err.println("VehicleDAO: Threw a SQLException retrieving the vehicle object.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
+    	      System.err.println(ex.getMessage());
+            }
+	    }
+	    return null;
+	}
+	
+	public List<Order> getCustomerOrders(int customerId){
+		List<Order> orders = new ArrayList<Order>();
+		
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try {
+	    	st = con.createStatement();
+	    	String selectOrderQuery = "SELECT * FROM Orders WHERE CustomerID = " + customerId + ";";
+	    	
+	    	ResultSet ordRS = st.executeQuery(selectOrderQuery);      
+	    	System.out.println("OrderDAO: *************** Query " + selectOrderQuery);
+	    	
+    	  Order order = new Order();
+    	  Customer customer = new Customer();
+    	  Vehicle vehicle = new Vehicle();
+	      while (ordRS.next() ) {
+	    	  order.setOrderId(ordRS.getInt("orderID"));
+	    	  order.setDate(ordRS.getDate("orderDate"));
+	    	  order.setOrderStatus(ordRS.getNString("orderStatus"));
+	    	  customer = custDAO.getCustomer(ordRS.getInt("customerID"));
+	    	  vehicle = vehDAO.getVehicle(ordRS.getInt("prducuctID"));
+	    	  order.setCostumer(customer);
+	    	  order.setVehicle(vehicle);
+	    	  orders.add(order);
+	      }
+	      
+	      ordRS.close();
+	      st.close();
+	      
+	      return orders;
+	    }	    
+	    catch (SQLException se) {
+	      System.err.println("VehicleDAO: Threw a SQLException retrieving the vehicle object.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
+    	      System.err.println(ex.getMessage());
+            }
+	    }
+	    return null;
 	}
 }

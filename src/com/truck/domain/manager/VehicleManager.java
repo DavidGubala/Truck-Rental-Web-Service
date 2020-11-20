@@ -59,12 +59,12 @@ private VehicleDAO vehDAO = new VehicleDAO();
 	}
 	
 	public List<Vehicle> getPartnerInventory(int id) {
-			try {
-				return vehDAO.getPartnerInventory(id);
-			} catch (Exception se) {
-				System.err.println("VehicleManager: Threw a Exception getting partner vehicle inventory.");
-				System.err.println(se.getMessage());
-			}
+		try {
+			return vehDAO.getPartnerInventory(id);
+		} catch (Exception se) {
+			System.err.println("VehicleManager: Threw a Exception getting partner vehicle inventory.");
+			System.err.println(se.getMessage());
+		}
 		return null;
 	}
 	

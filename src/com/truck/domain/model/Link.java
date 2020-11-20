@@ -10,9 +10,10 @@ public class Link {
 
 	public Link() {}
 	
-	public Link(String action, String url) {
+	public Link(String action, String url, String mediaType) {
 		this.action = action;
 		this.url = url;
+		this.mediaType = mediaType;
 	}
 	
 	public String getAction() {

@@ -1,5 +1,7 @@
 package com.truck.service;
 
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,7 +14,9 @@ import javax.ws.rs.core.Response.Status;
 
 import com.truck.service.representation.CustomerRepresentation;
 import com.truck.service.representation.CustomerRequest;
+import com.truck.service.representation.OrderRepresentation;
 import com.truck.service.workflow.CustomerActivity;
+import com.truck.service.workflow.OrderActivity;
 
 @Path("/CustomerService/")
 public class CustomerResource implements CustomerService {
@@ -33,6 +37,15 @@ public class CustomerResource implements CustomerService {
 		System.out.println("GET METHOD Request from Client with CustomerID int ............." + id);
 		CustomerActivity custActivity = new CustomerActivity();
 		return custActivity.getCustomer(id);
+	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/customer/{customerId}/orders")
+	public List<OrderRepresentation> getCustomerOrders(@PathParam("customerId") int id) {
+		System.out.println("GET METHOD Request from Client Orders with PartnerID int ............." + id);
+		OrderActivity orderActivity = new OrderActivity();
+		return orderActivity.getOrdersC(id);
 	}
 
 	@PUT

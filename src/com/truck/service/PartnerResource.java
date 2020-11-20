@@ -12,10 +12,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.truck.service.representation.OrderRepresentation;
 import com.truck.service.representation.PartnerRepresentation;
 import com.truck.service.representation.PartnerRequest;
 import com.truck.service.representation.VehicleRepresentation;
 import com.truck.service.representation.VehicleRequest;
+import com.truck.service.workflow.OrderActivity;
 import com.truck.service.workflow.PartnerActivity;
 import com.truck.service.workflow.VehicleActivity;
 
@@ -67,8 +69,17 @@ public class PartnerResource implements PartnerService {
 	@Path("/partner/{partnerId}/inventory")
 	public List<VehicleRepresentation> getPartnerInventory(@PathParam("partnerId") int id) {
 		System.out.println("GET METHOD Request from Client Inventory with PartnerID int ............." + id);
-		PartnerActivity partActivity = new PartnerActivity();
-		return partActivity.getInventory(id);
+		VehicleActivity vehActivity = new VehicleActivity();
+		return vehActivity.getPartnerInventory(id);
+	}
+	
+	@GET
+	@Produces({"application/xml" , "application/json"})
+	@Path("/partner/{partnerId}/orders")
+	public List<OrderRepresentation> getPartnerOrders(@PathParam("partnerId") int id) {
+		System.out.println("GET METHOD Request from Client Orders with PartnerID int ............." + id);
+		OrderActivity orderActivity = new OrderActivity();
+		return orderActivity.getOrdersP(id);
 	}
 	
 	@POST
@@ -83,7 +94,7 @@ public class PartnerResource implements PartnerService {
 	@PUT
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partner/{partnerId}/inventory/{productId}")
-	public VehicleRepresentation updateVehicle(VehicleRequest vehicleRequest, @PathParam("partnerId") int productId, @PathParam("partnerId") int partnerId) {
+	public VehicleRepresentation updateVehicle(VehicleRequest vehicleRequest, @PathParam("partnerId") int productId, @PathParam("productId") int partnerId) {
 		System.out.println("PUT METHOD Request from Client with ProductID int............." + productId);
 		VehicleActivity vehActivity = new VehicleActivity();
 		return vehActivity.editVehicle(vehicleRequest, productId, partnerId);
@@ -92,7 +103,7 @@ public class PartnerResource implements PartnerService {
 	@DELETE
 	@Produces({"application/xml" , "application/json"})
 	@Path("/partner/{partnerId}/inventory/{productId}")
-	public Response deleteProduct(@PathParam("partnerId") int productId, @PathParam("partnerId") int partnerId) {
+	public Response deleteProduct(@PathParam("partnerId") int productId, @PathParam("productId") int partnerId) {
 		System.out.println("DELETE METHOD Request from Client with PartnerID,ProductID int ............." + partnerId + "," + productId);
 		VehicleActivity vehActivity = new VehicleActivity();
 		String res = vehActivity.deleteVehicle(partnerId,productId);

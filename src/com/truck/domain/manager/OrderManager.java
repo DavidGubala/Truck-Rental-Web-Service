@@ -1,5 +1,6 @@
 package com.truck.domain.manager;
 
+import java.util.List;
 import java.util.Random;
 
 import com.truck.dal.OrderDAO;
@@ -56,5 +57,25 @@ public class OrderManager {
 			System.err.println("OrderManager: Threw a Exception deleting order.");
 			System.err.println(se.getMessage());
 		}
+	}
+	
+	public List<Order> getPartnerOrders(int id){
+		try {
+			return orderDAO.getPartnerOrders(id);
+		} catch (Exception se) {
+			System.err.println("OrderManager: Threw a Exception getting partner orders.");
+			System.err.println(se.getMessage());
+		}
+		return null;
+	}
+	
+	public List<Order> getCustomerOrders(int id){
+		try {
+			return orderDAO.getCustomerOrders(id);
+		} catch (Exception se) {
+			System.err.println("OrderManager: Threw a Exception getting Customer orders.");
+			System.err.println(se.getMessage());
+		}
+		return null;
 	}
 }

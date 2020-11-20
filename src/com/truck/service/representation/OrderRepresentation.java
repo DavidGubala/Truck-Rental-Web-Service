@@ -1,5 +1,7 @@
 package com.truck.service.representation;
 
+import java.sql.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,8 +15,9 @@ import com.truck.domain.model.user.Customer;
 @XmlType(name = "")
 public class OrderRepresentation extends AbstractRepresentation{
 	private int orderId;
-	private Vehicle vehicle;
-	private Customer customer;
+	private int vehicleId;
+	private int customerId;
+	private Date orderDate;
 	
 	public OrderRepresentation() {}
 	
@@ -26,19 +29,27 @@ public class OrderRepresentation extends AbstractRepresentation{
 		this.orderId = orderId;
 	}
 	
-	public Vehicle getVehicle() {
-		return vehicle;
+	public Date getDate() {
+		return orderDate;
 	}
 	
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setDate(Date date) {
+		this.orderDate = date;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
+	public int getVehicleId() {
+		return vehicleId;
 	}
 	
-	public void setCustomer(Customer cust) {
-		this.customer = cust;
+	public void setVehicleId(int id) {
+		this.vehicleId = id;
+	}
+	
+	public int getCustomerId() {
+		return customerId;
+	}
+	
+	public void setCustomerId(int id) {
+		this.customerId = id;
 	}
 }
