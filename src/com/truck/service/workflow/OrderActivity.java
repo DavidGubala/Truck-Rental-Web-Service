@@ -30,7 +30,7 @@ public class OrderActivity{
 		ordRep.setCustomerId(order.getCustomerId());
 		ordRep.setPartnerId(order.getPartnerId());
 		ordRep.setOrderId(order.getOrderId());
-		orderLinks(ordRep, orderId, cop);
+		orderLinks(ordRep, id, cop);
 		return ordRep;
 	}
 	
@@ -49,6 +49,7 @@ public class OrderActivity{
 		case 1:
 			self = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			orders = om.getCustomerOrders(id);
+			System.out.print(orders);
 			break;
 		case 2:
 			self = new Link("getPartner", "http://localhost:8081/PartnerService/partner/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
@@ -61,12 +62,9 @@ public class OrderActivity{
 		
 		for(int i = 0; i < orders.size(); i++) {
 			ord = orders.get(i);
-			ordRep.setOrderId(ord.getOrderId());
-			ordRep.setVehicleId(ord.getVehicleId());
-			ordRep.setCustomerId(ord.getCustomerId());
-			ordRep.setDate(ord.getDate());
+			ordRep = getOrder(ord.getOrderId(), id, cop);
 			
-			view = new Link("getOrder",  "http://localhost:8081/OrderService/order/" + ordRep.getOrderId( )+ id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+			view = new Link("getOrder",  "http://localhost:8081/OrderService/order/" + ordRep.getOrderId( ) + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			ordRep.setLinks(view);
 			ordersRep.setToList(ordRep);
 		}
@@ -88,25 +86,26 @@ public class OrderActivity{
 	}
 	
 	public void orderLinks(OrderRepresentation ordRep, int id, int cop) {
-		Link vehicle = new Link();
-		Link self = new Link();
+		Link vehicle, customer, partner, self = new Link();
 		Link viewSiteInventory = new Link("getSiteInventory", "http://localhost:8081/VehicleService/vehicle?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 		
 		switch(cop) {
 		case 1: // Customer
 			self = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+			partner = new Link("getPartner", "http://localhost:8081/PartnerService/partner/" + ordRep.getPartnerId() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			if(ordRep.getCustomerId() == id) {
 				vehicle = new Link("getVehicle", "http://localhost:8081/VehicleService/vehicle/" + ordRep.getVehicleId() + "?id="+ id + "cop=" + cop, "application/vnd.truck+xml");
-				ordRep.setLinks(vehicle, viewSiteInventory);
+				ordRep.setLinks(self, vehicle, partner, viewSiteInventory);
 			}else {
 				ordRep.setLinks(self, viewSiteInventory);
 			}
 			break;
 		case 2: // Partner
 			self = new Link("getPartner", "http://localhost:8081/PartnerService/partner/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+			customer = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + ordRep.getPartnerId() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			if(ordRep.getCustomerId() == id) {
 				vehicle = new Link("getVehicle", "http://localhost:8081/VehicleService/vehicle/" + ordRep.getVehicleId() +  "?id="+ id + "?cop=" + cop, "application/vnd.truck+xml");
-				Link customer = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + ordRep.getCustomerId() +  "?id="+ id + "?cop=" + cop, "application/vnd.truck+xml");
+				customer = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + ordRep.getCustomerId() +  "?id="+ id + "?cop=" + cop, "application/vnd.truck+xml");
 				ordRep.setLinks(self, viewSiteInventory, vehicle, customer);
 			}else {
 				ordRep.setLinks(self,viewSiteInventory);

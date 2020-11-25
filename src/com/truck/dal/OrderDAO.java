@@ -23,7 +23,7 @@ public class OrderDAO {
 
         try {
         	//Insert the order object
-            String ordStm = "INSERT INTO Orders(ID, productID, partnerId, customerID, orderDate, orderStatus) VALUES(?, ?, ?, ?, ?, ?)";
+            String ordStm = "INSERT INTO Orders(ID, vehicleID, partnerId, customerID, orderDate, orderStatus) VALUES(?, ?, ?, ?, ?, ?)";
             ordPst = con.prepareStatement(ordStm);
             ordPst.setInt(1, ord.getOrderId());
             ordPst.setInt(2, ord.getVehicleId());
@@ -80,11 +80,11 @@ public class OrderDAO {
 	    	//Vehicle vehicle = new Vehicle();
 	    	
 	    	while ( ordRS.next() ) {
-	    		
-	    		order.setOrderId(ordRS.getInt("orderID"));
+	    		order.setOrderId(ordRS.getInt("id"));
 	    		order.setDate(ordRS.getDate("orderDate"));
-	    		order.setOrderStatus(ordRS.getNString("orderStatus"));
+	    		order.setOrderStatus(ordRS.getString("orderStatus"));
 	    		order.setCustomerId(ordRS.getInt("customerId"));
+	    		order.setVehicleId(ordRS.getInt("vehicleid"));
 	    		order.setVehicleId(ordRS.getInt("vehicleId"));
 	    		order.setPartnerId(ordRS.getInt("partnerId"));
 	    		
@@ -102,7 +102,6 @@ public class OrderDAO {
 	    	
 	    	ordRS.close();
 	    	st.close();
-	    	
 	    	return order;
 	    }	    
 	    catch (SQLException se) {
@@ -173,16 +172,18 @@ public class OrderDAO {
     	  //Vehicle vehicle = new Vehicle();
 	      while (ordRS.next() ) {
 	    	  order = new Order();
-	    	  order.setOrderId(ordRS.getInt("orderID"));
+	    	  order.setOrderId(ordRS.getInt("id"));
 	    	  order.setDate(ordRS.getDate("orderDate"));
-	    	  order.setOrderStatus(ordRS.getNString("orderStatus"));
+	    	  order.setOrderStatus(ordRS.getString("orderStatus"));
 	    	  order.setCustomerId(ordRS.getInt("customerId"));
 	    	  order.setVehicleId(ordRS.getInt("vehicleId"));
+	    	  order.setPartnerId(ordRS.getInt("partnerId"));
 	    	  
 	    	  //customer = custDAO.getCustomer(ordRS.getInt("customerID"));
 	    	  //vehicle = vehDAO.getVehicle(ordRS.getInt("prducuctID"));
 	    	  //order.setCostumer(customer);
 	    	  //order.setVehicle(vehicle);
+	    	  
 	    	  orders.add(order);
 	      }
 	      
@@ -228,10 +229,11 @@ public class OrderDAO {
     	  //Vehicle vehicle = new Vehicle();
 	      while (ordRS.next() ) {
 	    	  order = new Order();
-	    	  order.setOrderId(ordRS.getInt("orderID"));
+	    	  order.setOrderId(ordRS.getInt("id"));
 	    	  order.setDate(ordRS.getDate("orderDate"));
-	    	  order.setOrderStatus(ordRS.getNString("orderStatus"));
+	    	  order.setOrderStatus(ordRS.getString("orderStatus"));
 	    	  order.setCustomerId(ordRS.getInt("customerId"));
+	    	  order.setPartnerId(ordRS.getInt("partnerId"));
 	    	  order.setVehicleId(ordRS.getInt("vehicleId"));
 	    	  
 	    	  //customer = custDAO.getCustomer(ordRS.getInt("customerID"));

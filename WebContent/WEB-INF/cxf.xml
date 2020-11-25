@@ -19,6 +19,7 @@
 			<ref bean="customerServiceRest" />
 			<ref bean="partnerServiceRest" />
 			<ref bean="vehicleServiceRest" />
+			<ref bean="orderServiceRest" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="jacksonProvider" />
@@ -31,11 +32,14 @@
 			<jaxrs:schemaLocation>com.truck.user.service.representation.PartnerRepresentation</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.truck.product.service.representation.VehicleRequest</jaxrs:schemaLocation>
 			<jaxrs:schemaLocation>com.truck.product.service.representation.VehicleRepresentation</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.product.service.representation.OrderRequest</jaxrs:schemaLocation>
+			<jaxrs:schemaLocation>com.truck.product.service.representation.OrderRepresentation</jaxrs:schemaLocation>
 		</jaxrs:schemaLocations>
 	</jaxrs:server>
 	
   	<bean id="customerServiceRest" class="com.truck.service.CustomerResource" />
   	<bean id="partnerServiceRest" class="com.truck.service.PartnerResource" />
   	<bean id="vehicleServiceRest" class="com.truck.service.VehicleResource" />
+  	<bean id="orderServiceRest" class="com.truck.service.OrderResource" />
   	
 </beans>

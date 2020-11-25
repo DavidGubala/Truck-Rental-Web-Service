@@ -144,7 +144,7 @@ public class VehicleActivity{
 		switch(cop) {
 		case 1:// Customer
 			self = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-			Link rent = new Link("createOrder", "http://localhost:8081/OrderService/order" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+			Link rent = new Link("createOrder", "http://localhost:8081/OrderService/order?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			vehRep.setLinks(self, viewSiteInventory, viewOwner, rent);
 			break;
 		case 2:// Partner

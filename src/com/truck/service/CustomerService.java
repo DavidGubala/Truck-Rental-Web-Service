@@ -1,4 +1,5 @@
 package com.truck.service;
+
 import javax.jws.WebService;
 import javax.ws.rs.core.Response;
 

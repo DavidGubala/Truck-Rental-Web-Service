@@ -16,7 +16,7 @@ import com.truck.service.representation.OrderRequest;
 import com.truck.service.workflow.OrderActivity;
 
 @Path("/OrderService/")
-public class OrderResource implements OrderService{
+public class OrderResource implements OrderService {
 	
 	@POST
 	@Produces({"application/xml", "application/json"})
