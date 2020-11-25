@@ -7,9 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.truck.domain.model.product.Vehicle;
-import com.truck.domain.model.user.Customer;
-
 @XmlRootElement(name = "Order")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
@@ -17,6 +14,7 @@ public class OrderRepresentation extends AbstractRepresentation{
 	private int orderId;
 	private int vehicleId;
 	private int customerId;
+	private int partnerId;
 	private Date orderDate;
 	
 	public OrderRepresentation() {}
@@ -51,5 +49,13 @@ public class OrderRepresentation extends AbstractRepresentation{
 	
 	public void setCustomerId(int id) {
 		this.customerId = id;
+	}
+	
+	public int getPartnerId() {
+		return partnerId;
+	}
+	
+	public void setPartnerId(int id) {
+		this.partnerId = id;
 	}
 }

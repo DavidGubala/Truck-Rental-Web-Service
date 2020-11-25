@@ -3,16 +3,14 @@ package com.truck.domain.model.order;
 import java.sql.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.truck.domain.model.product.Vehicle;
-import com.truck.domain.model.user.Customer;
-
 @XmlRootElement
 public class Order {
 	private int orderId; 				// Each order located by and ID
 	private Date orderDate;	// Date Order was placed
 	private String orderStatus="Open";	// Current Status of Order
-	private Customer customer;			// Customer the order is for
-	private Vehicle vehicle;			// Product the Customer is ordering
+	private int customerId;			// Customer the order is for
+	private int vehicleId;			// Product the Customer is ordering
+	private int partnerId;			// Product the Customer is ordering
 	private Reservation reservaton;		// Reservation information 
 	private Transaction transaction;	// Transaction information
 	
@@ -25,12 +23,12 @@ public class Order {
 		this.orderId = id;
 	}
 	
-	public Vehicle getVehicle() {
-		return vehicle;
+	public int getVehicleId() {
+		return vehicleId;
 	}
 	
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setVehicleId(int id) {
+		this.vehicleId = id;
 	}
 	
 	public Date getDate() {
@@ -41,12 +39,20 @@ public class Order {
 		this.orderDate = date;
 	}
 	
-	public Customer getCustomer() {
-		return customer;
+	public int getCustomerId() {
+		return customerId;
 	}
 	
-	public void setCostumer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerId(int id) {
+		this.customerId = id;
+	}
+	
+	public int getPartnerId() {
+		return partnerId;
+	}
+	
+	public void setPartnerId(int id) {
+		this.partnerId = id;
 	}
 
 	public Reservation getReservation() {
@@ -104,9 +110,5 @@ public class Order {
 		} else {
 			throw new IllegalStateException("Cannot return order in this state.");
 		}
-	}
-	
-	public double getOrderTotal() {
-		return getVehicle().getPricePerMile(); //  dummy value for now until we work out pricing options. Price per mile/price per hour/day?
 	}
 }

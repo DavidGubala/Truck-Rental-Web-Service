@@ -11,28 +11,30 @@ import java.util.List;
 import com.truck.domain.model.product.Vehicle;
 
 public class VehicleDAO {
-	public void addVehicle(Vehicle veh, int partnerId) {
+	public void addVehicle(Vehicle veh) {
 		Connection con = DBHelper.getConnection();
         PreparedStatement vehPst = null;
 
         try {
-        	//Insert the Partner object
-            //String prodStm = "INSERT INTO Vehicle(ID, PartnerID, vehicleType, price, plateNumber, make, model, year, availability, vin, odometer ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String prodStm = "INSERT INTO Vehicles(ID, PartnerID, price, make, model, year, availablility, odometer) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            vehPst = con.prepareStatement(prodStm);
+            String proStm = "INSERT INTO VEHICLES(ID, PARTNERID, PRICE, MAKE, MODEL, YEAR, AVAILABILITY, ODOMETER) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+        	vehPst = con.prepareStatement(proStm);
             vehPst.setInt(1, veh.getProductId());
-            vehPst.setInt(2, partnerId);
+            vehPst.setInt(2, veh.getPartnerId());
             vehPst.setDouble(3, veh.getPricePerMile());
             vehPst.setString(4, veh.getMake());
             vehPst.setString(5, veh.getModel());
             vehPst.setInt(6, veh.getYear());
             vehPst.setString(7, veh.getAvailability()); 
             vehPst.setInt(8, veh.getOdometer());
+
+        	System.out.println("VehicleDAO: *************** Query " + vehPst);
+        	System.out.println(vehPst.toString());
             
-            if(vehPst.toString().contains("?")){
-                System.err.println("Statement still contains a ? and can't be executed");
-            } else{
+        	if(vehPst.toString().contains("?")){
+        		System.err.println("Statement still contains a ? and can't be executed");
+            } else {
             	vehPst.executeUpdate();
+            	System.out.println("adding executed");
             }
             
         } catch (SQLException ex) {
@@ -64,13 +66,14 @@ public class VehicleDAO {
 	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = " + vehId + ";";
 	    	
 	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
-	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
+	    	System.out.println("VehicleDAO: *************** Query " + selectVehicleQuery);
 	    	
 	      //Get Vehicle
     	  Vehicle vehicle = new Vehicle();
     	  
 	      while ( vehRS.next() ) {														
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
+	    	  vehicle.setPartnerId(vehRS.getInt("PartnerId"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
 	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
@@ -107,7 +110,7 @@ public class VehicleDAO {
 	// Update
 	public void editVehicle(Vehicle veh, int vehId) {
 		deleteVehicle(veh.getProductId());
-		addVehicle(veh, vehId);
+		addVehicle(veh);
 	}	
 	// Delete
 	public void deleteVehicle(int vehId) {
@@ -151,9 +154,10 @@ public class VehicleDAO {
 	    	System.out.println("VehicleDAO: *************** Query " + selectVehicleQuery);
 	    	
 	      //Get Vehicle
-    	  Vehicle vehicle = new Vehicle();
+    	  Vehicle vehicle;
     	  
-	      while (vehRS.next() ) {														
+	      while (vehRS.next() ) {
+	    	  vehicle = new Vehicle();
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
 	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
@@ -207,7 +211,8 @@ public class VehicleDAO {
 	      //Get Vehicle
     	  Vehicle vehicle = new Vehicle();
     	  
-	      while (vehRS.next() ) {														
+	      while (vehRS.next() ) {
+	    	  vehicle = new Vehicle();
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
 	    	  vehicle.setPricePerMile(vehRS.getInt("price"));

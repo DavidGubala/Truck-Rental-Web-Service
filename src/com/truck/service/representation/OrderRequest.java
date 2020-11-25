@@ -5,31 +5,37 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import com.truck.domain.model.product.Vehicle;
-import com.truck.domain.model.user.Customer;
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class OrderRequest {
-	private Customer customer;
-	private Vehicle vehicle;
+	private int customerId;
+	private int vehicleId;
+	private int partnerId;
 	
 	public OrderRequest() {}
 	
-	public Customer getCustomer() {
-		return customer;
+	public int getCustomerId() {
+		return customerId;
 	}
 	
-	public void setCustomer(Customer cust) {
-		this.customer = cust;
+	public void setCustomerId(int id) {
+		this.customerId = id;
 	}
 	
-	public Vehicle getVehicle() {
-		return vehicle;
+	public int getVehicleId() {
+		return vehicleId;
 	}
 	
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
+	public void setVehicleId(int id) {
+		this.vehicleId = id;
+	}
+	
+	public int getPartnerId() {
+		return partnerId;
+	}
+	
+	public void setPartnerId(int id) {
+		this.partnerId = id;
 	}
 }

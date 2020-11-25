@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class VehicleRequest {
-	private int vehicleId;
 	private int price;
 	private String make;
 	private String model;
@@ -18,14 +17,6 @@ public class VehicleRequest {
 	private int odometer;
 	
 	public VehicleRequest() {}
-	
-	public int getVehicleId() {
-		return vehicleId;
-	}
-
-	public void setVehicleId(int vehicleId) {
-		this.vehicleId = vehicleId;
-	}
 	
 	public int getPrice() {
 		return price;

@@ -21,28 +21,28 @@ public class OrderResource implements OrderService{
 	@POST
 	@Produces({"application/xml", "application/json"})
 	@Path("/order")
-	public OrderRepresentation createOrder(OrderRequest ordReq) {
-		System.out.println("POST METHOD Request from Client with ............." + ordReq.getCustomer().getFirstName() + " " + ordReq.getCustomer().getLastName());
+	public OrderRepresentation createOrder(OrderRequest ordReq, @QueryParam("id") int id, @QueryParam("cop") int cop) {
+		System.out.println("POST METHOD Request from Client with ID ............." + ordReq.getCustomerId());
 		OrderActivity oderActivity = new OrderActivity();
-		return oderActivity.createOrder(ordReq);
+		return oderActivity.createOrder(ordReq, ordReq.getCustomerId(), cop);
 	}
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/{orderId}")
-	public OrderRepresentation getOrderId(@PathParam("orderId") int id) {
+	public OrderRepresentation getOrder(@PathParam("orderId") int orderId, @QueryParam("id") int id, @QueryParam("cop") int cop) {
 		System.out.println("GET METHOD Request from Client with OrderId int ............." + id);
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.getOrder(id);
+		return orderActivity.getOrder(orderId, id, cop);
 	}
 	
 	@PUT
 	@Produces({"application/xml", "application/json"})
 	@Path("/order/{orderId}")
-	public OrderRepresentation updateOrder(@PathParam("orderId")int id, OrderRequest ordReq) {
-		System.out.println("PUT METHOD Request from Client with ............." + id + " " + ordReq.getCustomer().getFirstName() + " " + ordReq.getCustomer().getLastName());
+	public OrderRepresentation updateOrder(@PathParam("orderId")int orderId, @QueryParam("id") int id, OrderRequest ordReq) {
+		System.out.println("PUT METHOD Request from Client with ............." + id);
 		OrderActivity orderActivity = new OrderActivity();
-		return orderActivity.editOrder(id, ordReq);
+		return orderActivity.editOrder(orderId, id, ordReq);
 	}
 	
 	@DELETE

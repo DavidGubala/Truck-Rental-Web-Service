@@ -20,13 +20,13 @@ private VehicleDAO vehDAO = new VehicleDAO();
 		return null;
 	}
 	//Create
-	public int addVehicle(Vehicle vehicle, int partnerId) {
+	public int addVehicle(Vehicle vehicle) {
 		Random randomGenerator = new Random();
 		int id = randomGenerator.nextInt(100000);
 		
 		try {
 			vehicle.setProductId(id);
-			vehDAO.addVehicle(vehicle, partnerId);
+			vehDAO.addVehicle(vehicle);
 		} catch (Exception se) {
 			System.err.println("VehicleManager: Threw a Exception retrieving vehicle.");
 			System.err.println(se.getMessage());

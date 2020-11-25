@@ -34,8 +34,8 @@
 		</jaxrs:schemaLocations>
 	</jaxrs:server>
 	
-  	<bean id="customerServiceRest" class="com.truck.user.service.CustomerResource" />
-  	<bean id="partnerServiceRest" class="com.truck.user.service.PartnerResource" />
-  	<bean id="vehicleServiceRest" class="com.truck.product.service.VehicleResource" />
+  	<bean id="customerServiceRest" class="com.truck.service.CustomerResource" />
+  	<bean id="partnerServiceRest" class="com.truck.service.PartnerResource" />
+  	<bean id="vehicleServiceRest" class="com.truck.service.VehicleResource" />
   	
 </beans>

@@ -8,9 +8,9 @@ import com.truck.service.representation.*;
 @WebService
 public interface OrderService {
 	
-	public OrderRepresentation getOrderId(int id);
-	public OrderRepresentation createOrder(OrderRequest OrderRequest);
-	public OrderRepresentation updateOrder(int id, OrderRequest OrderRequest);
+	public OrderRepresentation getOrder(int orderId, int id, int cop);
+	public OrderRepresentation createOrder(OrderRequest OrderRequest, int id, int cop);
+	public OrderRepresentation updateOrder(int orderId, int id, OrderRequest OrderRequest);
 	public Response deleteOrder(int id);
 	
 }

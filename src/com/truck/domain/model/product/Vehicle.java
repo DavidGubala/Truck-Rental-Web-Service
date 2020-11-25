@@ -11,6 +11,7 @@ public class Vehicle extends Product {
 	private String vin;
 	private String type;
 	private String available;
+	private int partnerId;
 	
 
 	public String getPlateNumber() {
@@ -51,6 +52,14 @@ public class Vehicle extends Product {
 
 	public void setOdometer(int odometer) {
 		this.odometer = odometer;
+	}
+	
+	public int getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(int partnerId) {
+		this.partnerId = partnerId;
 	}
 	
 	public String getVin() {

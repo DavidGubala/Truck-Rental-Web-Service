@@ -1,4 +1,4 @@
-	package com.truck.service.representation;
+package com.truck.service.representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,6 +16,7 @@ public class VehicleRepresentation extends AbstractRepresentation{
 	private int year;
 	private String availability;
 	private int odometer;
+	private int partnerId;
 
 	public VehicleRepresentation() {}
 	
@@ -73,5 +74,12 @@ public class VehicleRepresentation extends AbstractRepresentation{
 
 	public void setOdometer(int odometer) {
 		this.odometer = odometer;
+	}
+	public int getPartnerId() {
+		return partnerId;
+	}
+
+	public void setPartnerId(int partnerId) {
+		this.partnerId = partnerId;
 	}
 }

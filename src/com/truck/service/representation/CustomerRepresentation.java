@@ -1,4 +1,4 @@
-	package com.truck.service.representation;
+package com.truck.service.representation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
