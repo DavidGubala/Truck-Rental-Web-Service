@@ -8,13 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-public class PartnerRequest {
-	private String firstName;
-	private String lastName;
+public class LoginRequest {
 	private String user;
 	private String pass;
-	
-	public PartnerRequest() {}
 	
 	public String getUserName() {
 		return user;
@@ -30,21 +26,5 @@ public class PartnerRequest {
 	
 	public void setPassword(String pass) {
 		this.pass = pass;
-	}
-	
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
-	public String getLastName() {
-		return lastName;
-	}
-	
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 }

@@ -21,11 +21,13 @@ public class CustomerDAO {
         	//Insert the customer object
             //String custStm = "INSERT INTO Customer(ID, firstName, lastName, dateOfBirth, homeAddressID, billingAddressID, phoneNumber, phoneType, email, driverLicenseType, licenseNumber, licenseExpirattionDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-        	String custStm = "INSERT INTO Customers(ID, firstName, lastName) VALUES(?, ?, ?);";
+        	String custStm = "INSERT INTO Customers(ID, firstName, lastName, uname, pass) VALUES(?, ?, ?, ?, ?);";
             custPst = con.prepareStatement(custStm);
             custPst.setInt(1, cust.getCustomerId());
             custPst.setString(2, cust.getFirstName());
             custPst.setString(3, cust.getLastName());
+            custPst.setString(4, cust.getUserName());
+            custPst.setString(5, cust.getPassword());
             //custPst.setDate(4, cust.getDateOfBirth());
             //custPst.setInt(5, cust.getHomeAddress().getAddressId());
             //custPst.setInt(6, cust.getBillingAddress().getAddressId());
@@ -65,7 +67,7 @@ public class CustomerDAO {
     }
 	
 	// Read
-	public Customer getCustomer(int customerId) {
+	public Customer getCustomerbyID(int customerId) {
 		Connection con = DBHelper.getConnection();
 		Statement st = null;
 		
@@ -89,8 +91,8 @@ public class CustomerDAO {
     	  
 	    	while ( custRS.next() ) {														// Customer Info Gathered
 	    		customer.setCustomerId(custRS.getInt("ID"));								// ID
-	    	  	customer.setLastName(custRS.getString("firstName"));						// First Name
-	    	  	customer.setFirstName(custRS.getString("lastName"));						// Last Name
+	    	  	customer.setFirstName(custRS.getString("firstName"));						// First Name
+	    	  	customer.setLastName(custRS.getString("lastName"));						// Last Name
 	    	  	/*
 	    	  	customer.setDateOfBirth(custRS.getDate("dateOfBirth"));						// Billing Address
 	    	  	phone.setNumber(custRS.getString("phoneNumber"));							// Phone Number
@@ -129,11 +131,113 @@ public class CustomerDAO {
 	    return null;
 	  }
 	
+	public Customer getCustomerbyUser(String user) {
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try {//Get Customer
+	    	st = con.createStatement();
+	    	String selectCustomerQuery = "SELECT * FROM Customers WHERE uname ='" + user +"';";
+	    	ResultSet custRS = null;
+	    	
+	    	try {
+	    		custRS = st.executeQuery(selectCustomerQuery);
+	    	}catch(SQLException ex){
+	    		System.err.print(ex);
+	    	}
+	    	
+	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
+	    	
+	    	Customer customer = new Customer();
+	    	
+	    	while ( custRS.next() ) {														// Customer Info Gathered
+	    		customer.setCustomerId(custRS.getInt("ID"));								// ID
+	    	  	customer.setFirstName(custRS.getString("firstname"));						// First Name
+	    	  	customer.setLastName(custRS.getString("lastname"));							// Last Name
+	    	  	customer.setUserName(custRS.getString("uname"));
+	    	  	customer.setPassword(custRS.getString("pass"));
+	    	  	
+	    	}
+	      
+	    	custRS.close();
+	    	System.out.print("GOT");
+	    	//customer.setHomeAddress(addDAO.getAddress(custRS.getInt("homeAddressID")));
+	    	//customer.setBillingAddress(addDAO.getAddress(custRS.getInt("billingAddressID")));
+	    	st.close();
+	    	return customer;
+	    }	    
+	    catch (SQLException se) {
+	    	System.err.println("CustomerDAO: Threw a SQLException retrieving the customer object.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
+	    } finally {
+
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      	System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+      	      	System.err.println(ex.getMessage());
+            }
+	    }
+	    return null;
+	  }
+	
 	// Update
 	public void editCustomer(Customer cust) {
-        int customerId = cust.getCustomerId();
-        deleteCustomer(customerId);
-        addCustomer(cust);
+        Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try {//Get Customer
+	    	st = con.createStatement();
+	    	String selectCustomerQuery = "SELECT * FROM Customers WHERE id = " + cust.getCustomerId() + ";";
+	    	ResultSet custRS = null;
+	    	
+	    	try {
+	    		custRS = st.executeQuery(selectCustomerQuery);
+	    	}catch(SQLException ex){
+	    		System.err.print(ex);
+	    	}
+	    	
+	    	System.out.println("CustomerDAO: *************** Query " + selectCustomerQuery);
+	    	
+	    	Customer customer = new Customer();
+	    	
+	    	while ( custRS.next() ) {														// Customer Info Gathered
+	    		customer.setCustomerId(custRS.getInt("ID"));								// ID
+	    	  	customer.setFirstName(custRS.getString("firstname"));						// First Name
+	    	  	customer.setLastName(custRS.getString("lastname"));							// Last Name
+	    	  	customer.setUserName(custRS.getString("uname"));
+	    	  	customer.setPassword(custRS.getString("pass"));
+	    	  	
+	    	}
+	    	System.out.print(customer.getUserName() + customer.getPassword());
+	    	cust.setPassword(customer.getPassword());
+	    	cust.setUserName(customer.getUserName());
+	    	custRS.close();
+	    	st.close();
+	    }	    
+	    catch (SQLException se) {
+	    	System.err.println("CustomerDAO: Threw a SQLException retrieving the customer object.");
+	    	System.err.println(se.getMessage());
+	    	se.printStackTrace();
+	    } finally {
+	    	int customerId = cust.getCustomerId();
+	        deleteCustomer(customerId);
+	        addCustomer(cust);
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      	System.err.println("CustomerDAO: Threw a SQLException saving the customer object.");
+      	      	System.err.println(ex.getMessage());
+            }
+	    }
+        
 	}
 	
 	// Delete

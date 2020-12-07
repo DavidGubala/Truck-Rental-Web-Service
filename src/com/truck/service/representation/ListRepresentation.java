@@ -12,13 +12,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class ListRepresentation {
-	private List<AbstractRepresentation> list = new ArrayList<AbstractRepresentation>();
+	private List<AbstractRepresentation> reps = new ArrayList<AbstractRepresentation>();
 	
 	public List<AbstractRepresentation> getList() {
-		return list;
+		return reps;
 	}
 	
 	public void setToList(AbstractRepresentation ab) {
-		this.list.add(ab);
+		this.reps.add(ab);
 	}
 }

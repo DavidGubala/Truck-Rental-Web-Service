@@ -8,8 +8,8 @@ import com.truck.service.representation.*;
 @WebService
 public interface OrderService {
 	
-	public OrderRepresentation getOrder(int orderId, int id, int cop);
-	public OrderRepresentation createOrder(OrderRequest OrderRequest, int id, int cop);
+	public Response getOrder(int orderId, int id, int cop);
+	public Response createOrder(OrderRequest OrderRequest, int id, int cop);
 	public OrderRepresentation updateOrder(int orderId, int id, OrderRequest OrderRequest);
 	public Response deleteOrder(int id);
 	

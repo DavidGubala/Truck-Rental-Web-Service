@@ -23,14 +23,13 @@ public class OrderDAO {
 
         try {
         	//Insert the order object
-            String ordStm = "INSERT INTO Orders(ID, vehicleID, partnerId, customerID, orderDate, orderStatus) VALUES(?, ?, ?, ?, ?, ?)";
+            String ordStm = "INSERT INTO Orders(ID, vehicleID, partnerId, customerID, orderStatus) VALUES(?, ?, ?, ?, ?)";
             ordPst = con.prepareStatement(ordStm);
             ordPst.setInt(1, ord.getOrderId());
             ordPst.setInt(2, ord.getVehicleId());
             ordPst.setInt(3,  ord.getPartnerId());
             ordPst.setInt(4, ord.getCustomerId());
-            ordPst.setDate(5, ord.getDate());
-            ordPst.setString(6, ord.getOrderStatus());
+            ordPst.setString(5, ord.getOrderStatus());
             //ordPst.setInt(6, ord.getReservation().getReservationId());
             //ordPst.setInt(7, ord.getTransaction().getTrasactionId());
             
@@ -81,7 +80,7 @@ public class OrderDAO {
 	    	
 	    	while ( ordRS.next() ) {
 	    		order.setOrderId(ordRS.getInt("id"));
-	    		order.setDate(ordRS.getDate("orderDate"));
+	    		//order.setDate(ordRS.getDate("orderDate"));
 	    		order.setOrderStatus(ordRS.getString("orderStatus"));
 	    		order.setCustomerId(ordRS.getInt("customerId"));
 	    		order.setVehicleId(ordRS.getInt("vehicleid"));
@@ -173,7 +172,7 @@ public class OrderDAO {
 	      while (ordRS.next() ) {
 	    	  order = new Order();
 	    	  order.setOrderId(ordRS.getInt("id"));
-	    	  order.setDate(ordRS.getDate("orderDate"));
+	    	  //order.setDate(ordRS.getDate("orderDate"));
 	    	  order.setOrderStatus(ordRS.getString("orderStatus"));
 	    	  order.setCustomerId(ordRS.getInt("customerId"));
 	    	  order.setVehicleId(ordRS.getInt("vehicleId"));
@@ -230,7 +229,7 @@ public class OrderDAO {
 	      while (ordRS.next() ) {
 	    	  order = new Order();
 	    	  order.setOrderId(ordRS.getInt("id"));
-	    	  order.setDate(ordRS.getDate("orderDate"));
+	    	  //order.setDate(ordRS.getDate("orderDate"));
 	    	  order.setOrderStatus(ordRS.getString("orderStatus"));
 	    	  order.setCustomerId(ordRS.getInt("customerId"));
 	    	  order.setPartnerId(ordRS.getInt("partnerId"));

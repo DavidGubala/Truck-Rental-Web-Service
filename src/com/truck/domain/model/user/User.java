@@ -13,6 +13,8 @@ public class User {
 	private Phone phone;
 	private String email;
 	private Date dateOfBirth;
+	private String user;
+	private String pass;
 	
 	public String getFirstName() {
 		return firstName;
@@ -77,5 +79,20 @@ public class User {
 	
 	public void setDateOfBirth(Date dob) {
 		this.dateOfBirth = dob;
+	}
+	public String getUserName() {
+		return user;
+	}
+	
+	public void setUserName(String user) {
+		this.user = user;
+	}
+	
+	public String getPassword() {
+		return pass;
+	}
+	
+	public void setPassword(String pass) {
+		this.pass = pass;
 	}
 }

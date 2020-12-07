@@ -3,6 +3,7 @@ package com.truck.service.workflow;
 import com.truck.domain.manager.CustomerManager;
 import com.truck.domain.model.Link;
 import com.truck.domain.model.user.Customer;
+import com.truck.domain.model.user.Partner;
 import com.truck.service.representation.CustomerRepresentation;
 import com.truck.service.representation.CustomerRequest;
 
@@ -13,13 +14,25 @@ public class CustomerActivity{
 		Customer newCust = new Customer();
 		newCust.setFirstName(custReq.getFirstName());
 		newCust.setLastName(custReq.getLastName());
+		newCust.setUserName(custReq.getUserName());
+		newCust.setPassword(custReq.getPassword());
 		int customerId = cm.addCustomer(newCust);
 		return getCustomer(customerId, customerId, 1);
+	}
+
+	public int login(String user, String pass) {
+		Customer cust = cm.getCustomerbyUser(user);
+		System.out.print(cust.getPassword() + "   " + pass);
+		if(cust.getPassword().equals(pass)) {
+			return cust.getCustomerId();
+		}else {
+			return 0;
+		}
 	}
 	
 	public CustomerRepresentation getCustomer(int customerId, int id, int cop) {
 		
-		Customer cust = cm.getCustomer(customerId);
+		Customer cust = cm.getCustomerbyID(customerId);
 		CustomerRepresentation custRep = new CustomerRepresentation();
 		custRep.setFirstName(cust.getFirstName());
 		custRep.setLastName(cust.getLastName());
@@ -43,32 +56,30 @@ public class CustomerActivity{
 	}
 	
 	public void customerLinks(CustomerRepresentation custRep, int id, int cop) {
-		Link self = new Link();
-		Link viewSiteInventory = new Link("getSiteInventory", "http://localhost:8081/VehicleService/vehicle?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-		System.out.print(cop);
+		//Link self = new Link();
+		//Link viewSiteInventory = new Link("Site Inventory", "http://localhost:8081/VehicleService/vehicle?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 		
 		switch(cop) {
 		case 1:// Customer
-			System.out.print("adding customer links");
-			self = new Link("getCustomer", "http://localhost:8081/CustomerService/customer/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-			
+			//self = new Link("Account Settings", "http://localhost:8081/CustomerService/customer/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
 			if(custRep.getCustomerid() == id) {
-				Link edit = new Link("updateCustomer", "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-				Link delete = new Link("deleteCustomer", "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");	
-				Link viewOrders = new Link("getOrders",  "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "/orders" + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-				custRep.setLinks(self, viewSiteInventory, edit, delete, viewOrders);
-			}else {
-				custRep.setLinks(self, viewSiteInventory);
+				Link edit = new Link("Edit Customer", "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+				Link delete = new Link("Delete Customer", "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");	
+				Link viewOrders = new Link("Get Orders",  "http://localhost:8081/CustomerService/customer/" + custRep.getCustomerid() + "/orders" + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
+				custRep.setLinks(edit, delete, viewOrders);
 			}
 			break;
+			/*
 		case 2:// Partner
-			System.out.print("adding partner links");
+			//System.out.print("adding partner links");
 			self = new Link("getPartner", "http://localhost:8081/PartnerService/partner/" + id + "?id=" + id + "&cop=" + cop, "application/vnd.truck+xml");
-			custRep.setLinks(self, viewSiteInventory);
+			custRep.setLinks(self);
 			break;
+			
 		default:// Viewer
 			custRep.setLinks(viewSiteInventory);
 			break;
+			*/
 		}
 	}
 }

@@ -36,25 +36,21 @@ private VehicleDAO vehDAO = new VehicleDAO();
 	//Update
 	public void editVehicle(Vehicle vehicle,int partnerId) {
 		//Partner Validation
-		if(vehDAO.validation(vehicle.getProductId(), partnerId)) {
-			try {
-				vehDAO.editVehicle(vehicle, partnerId);
-			} catch (Exception se) {
-				System.err.println("VehicleManager: Threw a Exception editing vehicle.");
-				System.err.println(se.getMessage());
-			}
+		try {
+			vehDAO.editVehicle(vehicle, partnerId);
+		} catch (Exception se) {
+			System.err.println("VehicleManager: Threw a Exception editing vehicle.");
+			System.err.println(se.getMessage());
 		}
 	}
 	//Delete
 	public void deleteVehicle(int vehId, int partnerId) {
 		//Partner Validation
-		if(vehDAO.validation(vehId, partnerId)) {
-			try {
-				vehDAO.deleteVehicle(vehId);
-			} catch (Exception se) {
-				System.err.println("VehicleManager: Threw a Exception deleting vehicle.");
-				System.err.println(se.getMessage());
-			}
+		try {
+			vehDAO.deleteVehicle(vehId);
+		} catch (Exception se) {
+			System.err.println("VehicleManager: Threw a Exception deleting vehicle.");
+			System.err.println(se.getMessage());
 		}
 	}
 	

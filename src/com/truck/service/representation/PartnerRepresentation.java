@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class PartnerRepresentation extends AbstractRepresentation{
-	private int partnerId;
+	private int id;
 	private String lastName;
 	private String firstName;
 
@@ -24,11 +24,11 @@ public class PartnerRepresentation extends AbstractRepresentation{
 	}
 
 	public int getPartnerid() {
-		return partnerId;
+		return id;
 	}
 
 	public void setPartnerId(int partnerId) {
-		this.partnerId = partnerId;
+		this.id = partnerId;
 	}
 
 	public String getLastName() {

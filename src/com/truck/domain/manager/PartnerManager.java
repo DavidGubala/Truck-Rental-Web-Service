@@ -24,9 +24,20 @@ public class PartnerManager {
 		return id;
 	}
 	
-	public Partner getPartner(int partnerId) {
+	public Partner getPartnerbyID(int partnerId) {
 		try {
-			Partner partner = partDAO.getPartner(partnerId);
+			Partner partner = partDAO.getPartnerbyID(partnerId);
+	    	return partner;
+	    } catch (Exception se) {
+	      System.err.println("PartnerManager: Threw a Exception retrieving customer.");
+	      System.err.println(se.getMessage());
+	    }
+		return null;
+	}
+	
+	public Partner getPartnerbyUser(String user) {
+		try {
+			Partner partner = partDAO.getPartnerbyUser(user);
 	    	return partner;
 	    } catch (Exception se) {
 	      System.err.println("PartnerManager: Threw a Exception retrieving customer.");

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 public class CustomerRepresentation extends AbstractRepresentation{
-	private int customerId;
+	private int id;
 	private String lastName;
 	private String firstName;
 
@@ -24,11 +24,11 @@ public class CustomerRepresentation extends AbstractRepresentation{
 	}
 
 	public int getCustomerid() {
-		return customerId;
+		return id;
 	}
 
 	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+		this.id = customerId;
 	}
 
 	public String getLastName() {

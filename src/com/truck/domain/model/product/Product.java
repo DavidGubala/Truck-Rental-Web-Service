@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Product {
 	private int productId;
 	private String productType;
-	private int pricePerMile;
+	private int price;
 	
 	public int getProductId() {
 		return productId;
@@ -23,11 +23,11 @@ public class Product {
 		this.productType = prodType;
 	}
 	
-	public int getPricePerMile() {
-		return pricePerMile;
+	public int getPrice() {
+		return price;
 	}
 	
-	public void setPricePerMile(int pricePerMile) {
-		this.pricePerMile = pricePerMile;
+	public void setPrice(int Price) {
+		this.price = Price;
 	}
 }

@@ -14,7 +14,7 @@
   	
   	<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
   	
-  	<jaxrs:server name="TruckingService" address="http://localhost:8081">
+  	<jaxrs:server name="truckingservice" address="http://localhost:8081">
 		<jaxrs:serviceBeans>
 			<ref bean="customerServiceRest" />
 			<ref bean="partnerServiceRest" />

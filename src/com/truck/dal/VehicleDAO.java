@@ -20,7 +20,7 @@ public class VehicleDAO {
         	vehPst = con.prepareStatement(proStm);
             vehPst.setInt(1, veh.getProductId());
             vehPst.setInt(2, veh.getPartnerId());
-            vehPst.setDouble(3, veh.getPricePerMile());
+            vehPst.setDouble(3, veh.getPrice());
             vehPst.setString(4, veh.getMake());
             vehPst.setString(5, veh.getModel());
             vehPst.setInt(6, veh.getYear());
@@ -75,7 +75,7 @@ public class VehicleDAO {
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  vehicle.setPartnerId(vehRS.getInt("PartnerId"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
-	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
+	    	  vehicle.setPrice(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
@@ -108,19 +108,71 @@ public class VehicleDAO {
 	    return null;
 	}
 	// Update
-	public void editVehicle(Vehicle veh, int vehId) {
-		deleteVehicle(veh.getProductId());
-		addVehicle(veh);
+	public void editVehicle(Vehicle veh, int partId) {
+		Connection con = DBHelper.getConnection();
+		Statement st = null;
+		
+	    try { 		
+	    	//Get Customer
+	    	st = con.createStatement();
+	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE ID = " + veh.getProductId() + ";";
+	    	
+	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
+	    	System.out.println("VehicleDAO: *************** Query " + selectVehicleQuery);
+	    	
+	      //Get Vehicle
+    	  Vehicle vehicle = new Vehicle();
+    	  
+	      while ( vehRS.next() ) {														
+	    	  vehicle.setProductId(vehRS.getInt("ID"));
+	    	  vehicle.setPartnerId(vehRS.getInt("PartnerId"));
+	    	  //vehicle.setType(vehRS.getString("vehicleType"));
+	    	  vehicle.setPrice(vehRS.getInt("price"));
+	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
+	    	  vehicle.setMake(vehRS.getString("make"));
+	    	  vehicle.setModel(vehRS.getString("model"));
+	    	  vehicle.setYear(vehRS.getInt("year"));								
+	    	  vehicle.setAvailability(vehRS.getString("availability"));
+	    	  //vehicle.setVin(vehRS.getString("vin"));
+	      }
+	      
+	      veh.setAvailability(vehicle.getAvailability());
+	      veh.setPartnerId(vehicle.getPartnerId());
+	      veh.setProductId(vehicle.getProductId());
+	      
+	      vehRS.close();
+	      st.close();
+	    }	    
+	    catch (SQLException se) {
+	      System.err.println("VehicleDAO: Threw a SQLException retrieving the vehicle object.");
+	      System.err.println(se.getMessage());
+	      se.printStackTrace();
+	    } finally {
+	    	
+	    	deleteVehicle(veh.getProductId());
+	    	
+			addVehicle(veh);
+			
+            try {
+                if (st != null) {
+                	st.close();
+                }
+
+            } catch (SQLException ex) {
+      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
+    	      System.err.println(ex.getMessage());
+            }
+	    }
 	}	
 	// Delete
 	public void deleteVehicle(int vehId) {
 		Connection con = DBHelper.getConnection();
 		Statement st = null;
-		
         try {
         	st = con.createStatement();
         	
-            String vehDELStm = "DELETE FROM Vehicle WHERE ID = " + vehId + ";";
+            String vehDELStm = "DELETE FROM Vehicles WHERE ID = " + vehId + ";";
+            System.out.println("VehicleDAO: *************** Query " + vehDELStm);
             st.executeQuery(vehDELStm);
             
         } catch (SQLException ex) {
@@ -146,7 +198,6 @@ public class VehicleDAO {
 		Statement st = null;
 		
 	    try { 		
-	    	//Get Customer
 	    	st = con.createStatement();
 	    	String selectVehicleQuery = "SELECT * FROM Vehicles WHERE PartnerID = " + partnerId + ";";
 	    	
@@ -160,7 +211,7 @@ public class VehicleDAO {
 	    	  vehicle = new Vehicle();
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
-	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
+	    	  vehicle.setPrice(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
@@ -215,7 +266,7 @@ public class VehicleDAO {
 	    	  vehicle = new Vehicle();
 	    	  vehicle.setProductId(vehRS.getInt("ID"));
 	    	  //vehicle.setType(vehRS.getString("vehicleType"));
-	    	  vehicle.setPricePerMile(vehRS.getInt("price"));
+	    	  vehicle.setPrice(vehRS.getInt("price"));
 	    	  //vehicle.setPlateNumber(vehRS.getString("plateNumber"));
 	    	  vehicle.setMake(vehRS.getString("make"));
 	    	  vehicle.setModel(vehRS.getString("model"));
@@ -247,42 +298,5 @@ public class VehicleDAO {
             }
 	    }
 		return null;
-	}
-	
-	public boolean validation(int vehId, int partnerId) {
-		boolean valid = false;
-		Connection con = DBHelper.getConnection();
-		Statement st = null;
-		
-	    try { 		
-	    	//Get Customer
-	    	st = con.createStatement();
-	    	String selectVehicleQuery = "SELECT partnerid FROM Vehicles where id = " + vehId + ";";
-	    	
-	    	ResultSet vehRS = st.executeQuery(selectVehicleQuery);      
-	    	System.out.println("CustomerDAO: *************** Query " + selectVehicleQuery);
-	    	//Validation step
-	    	if(vehRS.getInt("partner") == partnerId) {
-	    		valid = true;
-	    	}else {
-	    		System.err.print("The partner does not have acces to this product.");
-		    	valid = false;
-	    	}
-	    }catch(SQLException ex){
-	    	System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
-  	      System.err.println(ex.getMessage());
-	    }finally {
-
-            try {
-                if (st != null) {
-                	st.close();
-                }
-
-            } catch (SQLException ex) {
-      	      System.err.println("VehicleDAO: Threw a SQLException saving the vehicle object.");
-    	      System.err.println(ex.getMessage());
-            }
-	    }
-	    return valid;
 	}
 }

@@ -26,10 +26,22 @@ public class CustomerManager {
 	}
 	
 	// Read
-	public Customer getCustomer(int customerId) {
+	public Customer getCustomerbyID(int customerId) {
+		try {
+			Customer customer = custDAO.getCustomerbyID(customerId);
+	    	return customer;
+	    } catch (Exception se) {
+	      System.err.println("CustomerManager: Threw a Exception retrieving customer.");
+	      System.err.println(se.getMessage());
+	    }
+		return null;
+	}
+	
+	public Customer getCustomerbyUser(String user) {
 		
 		try {
-			Customer customer = custDAO.getCustomer(customerId);
+			Customer customer = custDAO.getCustomerbyUser(user);
+			System.out.print(customer);
 	    	return customer;
 	    } catch (Exception se) {
 	      System.err.println("CustomerManager: Threw a Exception retrieving customer.");
