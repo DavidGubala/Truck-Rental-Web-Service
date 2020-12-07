@@ -52,10 +52,11 @@ These query parameters in the URI are used in the backend to identify the user a
 
 ## Models
 ### Databases
-
+![DatabaseModelIMG](https://github.com/DavidGubala/Shipper/blob/master/docs/Database.png)
 ### Domains
-
+![DatabaseModelIMG](https://github.com/DavidGubala/Shipper/blob/master/docs/Domains.png)
 ### Workflows
+![DatabaseModelIMG](https://github.com/DavidGubala/Shipper/blob/master/docs/Workflows.png)
 
 ## Known Issues
 	- Vehicle Availability does nothing, defautls to Available
