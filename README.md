@@ -8,7 +8,7 @@ This project was originally located at [bitbucket](https://bitbucket.org/ethomas
 
 ## Technology
 
-	-PostgreSQL
+	-PostgreSQL (Demo sql dump can be found in docs/)
 	-Java
 	-Apache CXF 2.7.9
 	-Apache Tomcat 9.0.40
