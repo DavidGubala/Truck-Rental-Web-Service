@@ -1,8 +1,8 @@
-# Shipper (Comp 388-001 Project)
+# Truck Rental Web Serivce (Comp 388-001 Project)
 
 This is a complete web-service project made for Comp 388-001: The Web Services Programming course at Loyola University Chicago
-This project is supposed to serve as a Truck Rental company. Similar to U-haul, except that the trucks for rent are
-not owned by Shipper, but rather owned, posted and managed by Partners of Shippper.
+This project is supposed to serve as a Truck Rental company. Similar to U-haul, except that the trucks for rent are owned, 
+posted and managed by Partners of the API.
 
 This project was originally located at [bitbucket](https://bitbucket.org/ethomas14/comp333_433_truck_rental/src/master/) and imported to this repository upon completion.
 
