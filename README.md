@@ -1,6 +1,6 @@
 # Truck Rental Web Serivce (Comp 388-001 Project)
 
-This is a complete web-service project made for Comp 388-001: The Web Services Programming course at Loyola University Chicago
+This is a complete API + Web-App made for Comp 388-001: The Web Services Programming course at Loyola University Chicago.
 This project is supposed to serve as a Truck Rental company. Similar to U-haul, except that the trucks for rent are owned, 
 posted and managed by Partners of the API.
 
